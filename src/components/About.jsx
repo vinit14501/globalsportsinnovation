@@ -1,3 +1,12 @@
+import React from "react"
+
+const listItems = [
+  "Driving brand visibility and equity",
+  "Campaign strategies in just 6 months",
+  "Results-driven plan",
+  "Optimize ROI",
+]
+
 export default function About() {
   return (
     <section
@@ -11,19 +20,14 @@ export default function About() {
               <h2 className="text-blue-600 text-3xl sm:text-4xl leading-tight lg:text-start text-center font-serif italic">
                 Why Global Sport Innovations?
               </h2>
-              <p className="text-gray-700 text-base sm:text-lg font-normal leading-relaxed lg:text-start text-center font-serif\">
+              <p className="text-gray-700 text-base sm:text-lg font-normal leading-relaxed lg:text-start text-center font-serif">
                 GSI empowers sports sponsors to create innovative and dynamic
                 campaign strategies without getting lost in complex ecosystems.
                 It&apos;s about creating meaningful connections, driving brand
                 visibility, and growing your business.
               </p>
-              <ul className="space-y-4 font-serif\">
-                {[
-                  "Driving brand visibility and equity",
-                  "Campaign strategies in just 6 months",
-                  "Results-driven plan",
-                  "Optimize ROI",
-                ].map((item, index) => (
+              <ul className="space-y-4 font-serif">
+                {listItems.map((item, index) => (
                   <li
                     key={index}
                     className="flex items-center space-x-3"

@@ -1,3 +1,4 @@
+import React from "react"
 import { MapPin, Phone, Mail } from "lucide-react"
 
 const LinkedInIcon = ({ className }) => (

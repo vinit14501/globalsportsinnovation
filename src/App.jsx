@@ -9,12 +9,10 @@ import Navbar from "./components/Navbar"
 import Services from "./components/Services"
 import Testimonials from "./components/Testimonials"
 import Gallery from "./components/Gallery"
-import Hero from "./components/Hero"
 
 function MainPage() {
   return (
     <>
-      {/* <Hero /> */}
       <Carousel />
       <About />
       <Services />
