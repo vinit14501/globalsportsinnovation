@@ -63,7 +63,10 @@ const SlidingContactForm = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-end">
-      <div className="w-full sm:w-96 bg-white dark:bg-gray-900 shadow-lg h-full overflow-y-auto p-8">
+      <div
+        className="w-full sm:w-96 bg-white dark:bg-gray-900 shadow-lg h-full overflow-y-auto p-8 transform transition-transform duration-300 ease-in-out"
+        style={{ transform: isOpen ? "translateX(0)" : "translateX(100%)" }}
+      >
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"

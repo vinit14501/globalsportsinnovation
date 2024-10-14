@@ -26,7 +26,7 @@ export default function Carousel() {
   useEffect(() => {
     const interval = setInterval(() => {
       if (!isFormOpen) {
-        setActiveSlide((prev) => !prev % slides.length)
+        setActiveSlide((prev) => (prev + 1) % slides.length)
       }
     }, 5000)
 
@@ -55,7 +55,9 @@ export default function Carousel() {
           <div
             key={index}
             className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${
-              index === activeSlide ? "opacity-100" : "opacity-0"
+              index === activeSlide
+                ? "opacity-100"
+                : "opacity-0 pointer-events-none"
             }`}
           >
             <img
@@ -71,7 +73,7 @@ export default function Carousel() {
                 {slide.buttonText && (
                   <button
                     onClick={openForm}
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-sm"
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-sm cursor-pointer"
                   >
                     {slide.buttonText}
                   </button>
@@ -86,13 +88,13 @@ export default function Carousel() {
         onClick={() =>
           goToSlide((activeSlide - 1 + slides.length) % slides.length)
         }
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-transparent hover:bg-blue-600 text-white p-2 rounded-full transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-transparent hover:bg-blue-600 text-white p-2 rounded-full transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
       >
         <ChevronLeft className="w-6 h-6" />
       </button>
       <button
         onClick={() => goToSlide((activeSlide + 1) % slides.length)}
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-transparent hover:bg-blue-600 text-white p-2 rounded-full transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-transparent hover:bg-blue-600 text-white p-2 rounded-full transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
       >
         <ChevronRight className="w-6 h-6" />
       </button>
@@ -102,7 +104,7 @@ export default function Carousel() {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none ${
+            className={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none cursor-pointer ${
               index === activeSlide
                 ? "bg-blue-600 scale-125"
                 : "bg-white hover:bg-blue-200"
