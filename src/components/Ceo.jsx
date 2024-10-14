@@ -9,7 +9,7 @@ export default function Ceo() {
           <div className="lg:col-span-3">
             <div className="max-w-md mx-auto">
               <img
-                className="w-full h-auto rounded-lg shadow-md transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-blue-100"
+                className="w-full h-auto rounded-sm shadow-md transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-blue-100"
                 src="/src/assets/ceo.png"
                 alt="CEO Susan Goldsmith"
               />
@@ -18,15 +18,13 @@ export default function Ceo() {
           <div className="lg:col-span-4 flex flex-col justify-start lg:items-start items-center">
             <div className="w-full space-y-5">
               <div className="space-y-1">
-                <h2 className="text-gray-800 text-3xl sm:text-4xl font-bold leading-tight lg:text-start text-center mb-4">
+                <h2 className="text-blue-600 text-3xl sm:text-4xl leading-tight lg:text-start text-center mb-4 font-serif italic">
                   Meet Our CEO
                 </h2>
-                <h3 className="text-blue-600 text-2xl font-bold leading-normal lg:text-start text-center">
+                <p className="text-gray-700 text-2xl font-bold leading-normal lg:text-start text-center font-serif ">
                   Susan Goldsmith
-                </h3>
-              </div>
-              <div className="space-y-4">
-                <p className="text-gray-700 text-base sm:text-lg font-normal leading-relaxed lg:text-start text-center">
+                </p>
+                <p className="text-gray-700 text-base sm:text-lg font-normal leading-relaxed lg:text-start text-center font-serif">
                   Over 30 years and 14 Olympic Games experience in global sports
                   marketing. Partnering with dozens of Fortune 500 companies for
                   purpose-driven initiatives with global impact.

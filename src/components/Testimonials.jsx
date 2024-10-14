@@ -38,8 +38,8 @@ const testimonials = [
 ]
 
 const TestimonialCard = ({ text, name, position, avatar }) => (
-  <div className="group bg-white border border-solid border-gray-300 rounded-xl p-6 transition-all duration-500 w-full mx-auto hover:border-blue-600 hover:shadow-md">
-    <p className="text-base text-gray-700 leading-relaxed transition-all duration-500 mb-8 group-hover:text-gray-800">
+  <div className="group bg-white border border-solid border-gray-300 rounded-sm p-6 transition-all duration-500 w-full mx-auto hover:border-blue-600 hover:shadow-md">
+    <p className="text-base text-gray-700 leading-relaxed transition-all duration-500 mb-8 group-hover:text-gray-800 font-serif">
       {text}
     </p>
     <div className="flex items-center gap-4 border-t border-solid border-gray-200 pt-5">
@@ -49,10 +49,12 @@ const TestimonialCard = ({ text, name, position, avatar }) => (
         alt={`${name}'s avatar`}
       />
       <div>
-        <h5 className="text-gray-800 font-bold transition-all duration-500 mb-1">
+        <h5 className="text-gray-800 font-bold transition-all duration-500 mb-1 font-serif">
           {name}
         </h5>
-        <span className="text-sm leading-4 text-gray-700">{position}</span>
+        <span className="text-sm leading-4 text-gray-700 font-serif">
+          {position}
+        </span>
       </div>
     </div>
   </div>
@@ -75,10 +77,10 @@ const Testimonials = () => {
     >
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 sm:mb-16 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
+          <h2 className="text-3xl sm:text-4xl text-blue-600 mb-4 font-serif italic">
             TESTIMONIALS
           </h2>
-          <p className="text-xl sm:text-2xl font-bold text-blue-600">
+          <p className="text-base font-normal leading-relaxed sm:text-2xl text-gray-800 font-serif italic">
             What our happy clients say!
           </p>
         </div>

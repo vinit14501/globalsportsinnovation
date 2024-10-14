@@ -9,6 +9,8 @@ export default function Navbar() {
   const [isDropdownLoading, setIsDropdownLoading] = useState(true)
   const [isSticky, setIsSticky] = useState(false)
   const [isContactFormOpen, setIsContactFormOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState("home")
+  const [activeSubSection, setActiveSubSection] = useState("")
   const navRef = useRef(null)
   const dropdownRef = useRef(null)
   const lastScrollY = useRef(0)
@@ -66,13 +68,33 @@ export default function Navbar() {
     }
   }, [isAboutDropdownOpen])
 
+  useEffect(() => {
+    if (location.pathname === "/" || location.pathname === "") {
+      const hash = window.location.hash.replace("#", "")
+      setActiveSection(hash || "home")
+    } else if (location.pathname === "/gallery") {
+      setActiveSection("gallery")
+    } else {
+      setActiveSection("")
+    }
+    setActiveSubSection("")
+  }, [location.pathname, location.hash])
+
   const handleNavItemClick = useCallback(
     (sectionId) => {
       setIsMobileMenuOpen(false)
       setIsAboutDropdownOpen(false)
+      setActiveSection(sectionId)
+      setActiveSubSection("")
 
       if (location.pathname === "/gallery") {
-        navigate(`/#${sectionId}`)
+        navigate("/")
+        setTimeout(() => {
+          const section = document.getElementById(sectionId)
+          if (section) {
+            section.scrollIntoView({ behavior: "smooth" })
+          }
+        }, 100)
       } else if (location.pathname !== "/") {
         window.location.href = `/#${sectionId}`
       } else {
@@ -80,10 +102,60 @@ export default function Navbar() {
         if (section) {
           section.scrollIntoView({ behavior: "smooth" })
         }
+        window.history.pushState(null, "", `/#${sectionId}`)
       }
     },
     [location.pathname, navigate]
   )
+
+  const handleSubSectionClick = useCallback(
+    (subSectionId) => {
+      setActiveSection("about")
+      setActiveSubSection(subSectionId)
+      setIsMobileMenuOpen(false)
+      setIsAboutDropdownOpen(false)
+
+      if (location.pathname === "/gallery") {
+        navigate("/")
+        setTimeout(() => {
+          const section = document.getElementById(subSectionId)
+          if (section) {
+            section.scrollIntoView({ behavior: "smooth" })
+          }
+        }, 100)
+      } else if (location.pathname !== "/") {
+        window.location.href = `/#${subSectionId}`
+      } else {
+        const section = document.getElementById(subSectionId)
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" })
+        }
+        window.history.pushState(null, "", `/#${subSectionId}`)
+      }
+    },
+    [location.pathname, navigate]
+  )
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const hash = window.location.hash.replace("#", "")
+      if (hash) {
+        setActiveSection(hash)
+        const section = document.getElementById(hash)
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" })
+        }
+      } else {
+        setActiveSection("home")
+      }
+    }
+
+    window.addEventListener("popstate", handlePopState)
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState)
+    }
+  }, [])
 
   const handleKeyDown = useCallback((event) => {
     if (event.key === "Escape") {
@@ -109,7 +181,7 @@ export default function Navbar() {
             <img
               src="/src/assets/logo.png"
               className={`transition-all duration-300 ${
-                isSticky ? "h-6" : "h-8"
+                isSticky ? "h-8" : "h-10"
               }`}
               alt="Logo"
             />
@@ -117,7 +189,7 @@ export default function Navbar() {
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <button
               type="button"
-              className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center transition duration-300 ease-in-out transform hover:scale-105"
+              className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 text-center transition duration-300 ease-in-out transform hover:scale-105 font-serif font-bold"
               onClick={toggleContactForm}
             >
               Book Now
@@ -125,15 +197,15 @@ export default function Navbar() {
             <button
               onClick={toggleMobileMenu}
               type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 font-serif"
               aria-controls="navbar-sticky"
               aria-expanded={isMobileMenuOpen}
             >
               <span className="sr-only">Open main menu</span>
               {isMobileMenuOpen ? (
-                <X className="w-5 h-5" />
+                <X className="w-6 h-6" />
               ) : (
-                <Menu className="w-5 h-5" />
+                <Menu className="w-6 h-6" />
               )}
             </button>
           </div>
@@ -147,7 +219,11 @@ export default function Navbar() {
               <li>
                 <button
                   onClick={() => handleNavItemClick("home")}
-                  className="block py-2 px-3 text-blue-600 rounded md:bg-transparent md:p-0 hover:text-blue-700 transition duration-300 ease-in-out text-sm"
+                  className={`block py-2 px-3 rounded md:p-0 transition duration-300 ease-in-out text-lg font-serif italic ${
+                    activeSection === "home"
+                      ? "text-blue-600"
+                      : "text-gray-900 hover:text-blue-700"
+                  }`}
                   aria-current="page"
                 >
                   Home
@@ -160,7 +236,11 @@ export default function Navbar() {
                 >
                   <button
                     id="dropdownNavbarLink"
-                    className="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:w-auto transition duration-300 ease-in-out text-sm"
+                    className={`flex items-center justify-between w-full py-2 px-3 rounded md:p-0 md:w-auto transition duration-300 ease-in-out text-lg font-serif italic ${
+                      activeSection === "about"
+                        ? "text-blue-600"
+                        : "text-gray-900 hover:text-blue-700"
+                    }`}
                     onClick={toggleAboutDropdown}
                     aria-expanded={isAboutDropdownOpen}
                   >
@@ -183,24 +263,38 @@ export default function Navbar() {
                         >
                           <li>
                             <button
-                              className="block px-4 py-2 hover:bg-gray-100 transition duration-300 ease-in-out w-full text-left"
-                              onClick={() => handleNavItemClick("about")}
+                              className={`block px-4 py-2 hover:bg-gray-100 transition duration-300 ease-in-out w-full text-left font-serif italic ${
+                                activeSubSection === "about"
+                                  ? "text-blue-600"
+                                  : ""
+                              }`}
+                              onClick={() => handleSubSectionClick("about")}
                             >
                               Why GSI
                             </button>
                           </li>
                           <li>
                             <button
-                              className="block px-4 py-2 hover:bg-gray-100 transition duration-300 ease-in-out w-full text-left"
-                              onClick={() => handleNavItemClick("story")}
+                              className={`block px-4 py-2 hover:bg-gray-100 transition duration-300 ease-in-out w-full text-left font-serif italic ${
+                                activeSubSection === "story"
+                                  ? "text-blue-600"
+                                  : ""
+                              }`}
+                              onClick={() => handleSubSectionClick("story")}
                             >
                               Story
                             </button>
                           </li>
                           <li>
                             <button
-                              className="block px-4 py-2 hover:bg-gray-100 transition duration-300 ease-in-out w-full text-left"
-                              onClick={() => handleNavItemClick("testimonial")}
+                              className={`block px-4 py-2 hover:bg-gray-100 transition duration-300 ease-in-out w-full text-left font-serif italic ${
+                                activeSubSection === "testimonial"
+                                  ? "text-blue-600"
+                                  : ""
+                              }`}
+                              onClick={() =>
+                                handleSubSectionClick("testimonial")
+                              }
                             >
                               Testimonials
                             </button>
@@ -214,7 +308,11 @@ export default function Navbar() {
               <li>
                 <button
                   onClick={() => handleNavItemClick("services")}
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 transition duration-300 ease-in-out text-sm"
+                  className={`block py-2 px-3 rounded md:p-0 transition duration-300 ease-in-out text-lg font-serif italic ${
+                    activeSection === "services"
+                      ? "text-blue-600"
+                      : "text-gray-900 hover:text-blue-700"
+                  }`}
                 >
                   Services
                 </button>
@@ -222,7 +320,11 @@ export default function Navbar() {
               <li>
                 <button
                   onClick={() => handleNavItemClick("clients")}
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 transition duration-300 ease-in-out text-sm"
+                  className={`block py-2 px-3 rounded md:p-0 transition duration-300 ease-in-out text-lg font-serif italic ${
+                    activeSection === "clients"
+                      ? "text-blue-600"
+                      : "text-gray-900 hover:text-blue-700"
+                  }`}
                 >
                   Clients served
                 </button>
@@ -230,7 +332,11 @@ export default function Navbar() {
               <li>
                 <Link
                   to="/gallery"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 transition duration-300 ease-in-out text-sm"
+                  className={`block py-2 px-3 rounded md:p-0 transition duration-300 ease-in-out text-lg font-serif italic ${
+                    activeSection === "gallery"
+                      ? "text-blue-600"
+                      : "text-gray-900 hover:text-blue-700"
+                  }`}
                 >
                   Gallery
                 </Link>
@@ -238,7 +344,11 @@ export default function Navbar() {
               <li>
                 <button
                   onClick={() => handleNavItemClick("contact")}
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 transition duration-300 ease-in-out text-sm"
+                  className={`block py-2 px-3 rounded md:p-0 transition duration-300 ease-in-out text-lg font-serif italic ${
+                    activeSection === "contact"
+                      ? "text-blue-600"
+                      : "text-gray-900 hover:text-blue-700"
+                  }`}
                 >
                   Contact
                 </button>
@@ -251,6 +361,14 @@ export default function Navbar() {
         isOpen={isContactFormOpen}
         onClose={toggleContactForm}
       />
+
+      <style>{`
+        @import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+        body {
+          font-family: "Merriweather", serif;
+        }
+      `}</style>
     </>
   )
 }
