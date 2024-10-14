@@ -14,7 +14,7 @@ export default function About() {
               <p className="text-gray-700 text-base sm:text-lg font-normal leading-relaxed lg:text-start text-center font-serif\">
                 GSI empowers sports sponsors to create innovative and dynamic
                 campaign strategies without getting lost in complex ecosystems.
-                It's about creating meaningful connections, driving brand
+                It&apos;s about creating meaningful connections, driving brand
                 visibility, and growing your business.
               </p>
               <ul className="space-y-4 font-serif\">
@@ -29,7 +29,7 @@ export default function About() {
                     className="flex items-center space-x-3"
                   >
                     <img
-                      src="/src/assets/tick.png"
+                      src="tick.png"
                       alt="Blue Tick"
                       className="w-6 h-6 flex-shrink-0"
                     />
@@ -44,7 +44,7 @@ export default function About() {
           <div className="w-full h-full">
             <img
               className="w-full h-auto rounded-sm object-cover shadow-xl"
-              src="/src/assets/about.png"
+              src="about.png"
               alt="About Us"
             />
           </div>

@@ -8,17 +8,17 @@ export default function Carousel() {
 
   const slides = [
     {
-      image: "/src/assets/carousel/carousel-1.jpg",
+      image: "carousel-1.jpg",
       title:
         "Are you a senior marketing executive leading Global Sports & Events partnerships?",
       buttonText: "Get a quote",
     },
     {
-      image: "/src/assets/carousel/carousel-2.jpg",
+      image: "carousel-2.jpg",
       title: "Empower your sports marketing and sponsorships with us",
     },
     {
-      image: "/src/assets/carousel/carousel-3.jpg",
+      image: "carousel-3.jpg",
       title: "Carve insight, innovation and impact to your strategy",
     },
   ]

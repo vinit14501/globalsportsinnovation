@@ -179,7 +179,7 @@ export default function Navbar() {
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <img
-              src="/src/assets/logo.png"
+              src="logo.png"
               className={`transition-all duration-300 ${
                 isSticky ? "h-8" : "h-10"
               }`}

@@ -10,7 +10,7 @@ export default function Ceo() {
             <div className="max-w-md mx-auto">
               <img
                 className="w-full h-auto rounded-sm shadow-md transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-blue-100"
-                src="/src/assets/ceo.png"
+                src="ceo.png"
                 alt="CEO Susan Goldsmith"
               />
             </div>

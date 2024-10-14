@@ -8,7 +8,7 @@ export default function Footer() {
           <div className="mb-6 md:mb-0">
             <a href="/home">
               <img
-                src="/src/assets/logo.png"
+                src="logo.png"
                 alt="Global Sports Innovation Logo"
                 className="w-48 h-12 object-contain"
               />

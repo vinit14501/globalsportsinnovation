@@ -1,25 +1,25 @@
 export default function Brand() {
   const brandsData = [
     {
-      imageSrc: "/src/assets/brand/coke.jpg",
+      imageSrc: "coke.jpg",
       altText: "Coke",
       name: "Coca-Cola",
       link: "#",
     },
     {
-      imageSrc: "/src/assets/brand/fifa.jpg",
+      imageSrc: "fifa.jpg",
       altText: "FIFA",
       name: "FIFA",
       link: "#",
     },
     {
-      imageSrc: "/src/assets/brand/olympic.png",
+      imageSrc: "olympic.png",
       altText: "Olympic",
       name: "Olympic",
       link: "#",
     },
     {
-      imageSrc: "/src/assets/brand/pepsi.png",
+      imageSrc: "pepsi.png",
       altText: "Pepsi",
       name: "Pepsi",
       link: "#",
