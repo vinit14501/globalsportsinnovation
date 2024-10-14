@@ -136,6 +136,14 @@ export default function Navbar() {
     [location.pathname, navigate]
   )
 
+  const handleLogoClick = useCallback(
+    (event) => {
+      event.preventDefault()
+      handleNavItemClick("home")
+    },
+    [handleNavItemClick]
+  )
+
   useEffect(() => {
     const handlePopState = () => {
       const hash = window.location.hash.replace("#", "")
@@ -177,6 +185,7 @@ export default function Navbar() {
           <Link
             to="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
+            onClick={handleLogoClick}
           >
             <img
               src="logo.png"

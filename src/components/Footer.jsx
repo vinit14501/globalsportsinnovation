@@ -1,18 +1,30 @@
 import { LinkedinIcon, Mail } from "lucide-react"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function Footer() {
+  const navigate = useNavigate()
+
+  const handleLogoClick = (event) => {
+    event.preventDefault()
+    navigate("/")
+    window.scrollTo(0, 0)
+  }
+
   return (
     <footer className="bg-gradient-to-b from-white to-gray-100 dark:bg-gray-900 py-12">
       <div className="container px-4 mx-auto sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
-            <a href="/home">
+            <Link
+              to="/"
+              onClick={handleLogoClick}
+            >
               <img
                 src="logo.png"
                 alt="Global Sports Innovation Logo"
                 className="w-48 h-12 object-contain"
               />
-            </a>
+            </Link>
           </div>
           <div className="flex flex-col space-y-4">
             <div className="flex items-center space-x-3">
