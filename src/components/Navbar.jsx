@@ -7,7 +7,6 @@ export default function Navbar() {
   const [state, setState] = useState({
     isAboutDropdownOpen: false,
     isMobileMenuOpen: false,
-    isDropdownLoading: true,
     isSticky: false,
     isContactFormOpen: false,
     activeSection: "home",
@@ -30,11 +29,7 @@ export default function Navbar() {
 
   const toggleAboutDropdown = useCallback(() => {
     toggleState("isAboutDropdownOpen")
-    if (!state.isDropdownLoading) {
-      updateState({ isDropdownLoading: true })
-      setTimeout(() => updateState({ isDropdownLoading: false }), 500)
-    }
-  }, [state.isDropdownLoading, toggleState, updateState])
+  }, [toggleState])
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -52,20 +47,16 @@ export default function Navbar() {
       lastScrollY.current = currentScrollY
     }
 
+    const debouncedHandleScroll = debounce(handleScroll, 100)
+
     document.addEventListener("mousedown", handleClickOutside)
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", debouncedHandleScroll, { passive: true })
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
-      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("scroll", debouncedHandleScroll)
     }
   }, [updateState])
-
-  useEffect(() => {
-    if (state.isAboutDropdownOpen) {
-      setTimeout(() => updateState({ isDropdownLoading: false }), 500)
-    }
-  }, [state.isAboutDropdownOpen, updateState])
 
   useEffect(() => {
     const hash = window.location.hash.replace("#", "")
@@ -240,28 +231,23 @@ export default function Navbar() {
                   >
                     About <ChevronDown className="w-4 h-4 ml-1" />
                   </button>
-                  {state.isAboutDropdownOpen && (
-                    <div
-                      id="dropdownNavbar"
-                      className="absolute z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 transition-all duration-300 ease-in-out"
+                  <div
+                    id="dropdownNavbar"
+                    className={`absolute z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 transition-all duration-300 ease-in-out ${
+                      state.isAboutDropdownOpen
+                        ? "opacity-100 visible transform translate-y-0"
+                        : "opacity-0 invisible transform -translate-y-2"
+                    }`}
+                  >
+                    <ul
+                      className="py-2 text-sm text-gray-700"
+                      aria-labelledby="dropdownLargeButton"
                     >
-                      {state.isDropdownLoading ? (
-                        <div className="py-2 px-4">
-                          <div className="h-4 bg-gray-200 rounded-full w-3/4 mb-2.5"></div>
-                          <div className="h-4 bg-gray-200 rounded-full w-1/2"></div>
-                        </div>
-                      ) : (
-                        <ul
-                          className="py-2 text-sm text-gray-700"
-                          aria-labelledby="dropdownLargeButton"
-                        >
-                          {renderDropdownItem("about", "Why GSI")}
-                          {renderDropdownItem("story", "Story")}
-                          {renderDropdownItem("testimonial", "Testimonials")}
-                        </ul>
-                      )}
-                    </div>
-                  )}
+                      {renderDropdownItem("about", "Why GSI")}
+                      {renderDropdownItem("story", "Story")}
+                      {renderDropdownItem("testimonial", "Testimonials")}
+                    </ul>
+                  </div>
                 </div>
               </li>
               {renderNavItem("services", "Services")}
@@ -287,14 +273,19 @@ export default function Navbar() {
         isOpen={state.isContactFormOpen}
         onClose={() => toggleState("isContactFormOpen")}
       />
-
-      <style>{`
-        @import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-
-        body {
-          font-family: "Merriweather", serif;
-        }
-      `}</style>
     </>
   )
+}
+
+// Utility function for debouncing
+function debounce(func, wait) {
+  let timeout
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout)
+      func(...args)
+    }
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+  }
 }
