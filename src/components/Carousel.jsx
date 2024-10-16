@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useMemo } from "react"
+import { useState, useCallback, useEffect, useMemo } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import SlidingContactForm from "./SlidingContactForm"
 
@@ -28,7 +28,7 @@ export default function Carousel() {
 
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % slides.length)
-    }, 6000)
+    }, 10000)
 
     return () => clearInterval(interval)
   }, [isFormOpen])
@@ -58,7 +58,7 @@ export default function Carousel() {
         />
         <div className="absolute inset-0 flex flex-col justify-center bg-black bg-opacity-50 px-4 sm:px-6 lg:px-8">
           <div className="w-full md:w-2/3 lg:w-1/2 max-w-screen-xl mx-auto md:ml-8 lg:ml-16">
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-6 text-white font-serif italic">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-2xl xl:text-3xl font-medium mb-6 text-white font-serif">
               {slide.title}
             </h2>
             {slide.buttonText && (

@@ -128,7 +128,7 @@ export default function Navbar() {
       <li>
         <button
           onClick={() => handleNavigation(sectionId)}
-          className={`block py-2 px-3 rounded md:p-0 transition duration-300 ease-in-out text-lg font-serif italic ${
+          className={`block py-2 px-3 rounded md:p-0 transition duration-300 ease-in-out text-lg font-serif ${
             state.activeSection === sectionId
               ? "text-blue-600"
               : "text-gray-900 hover:text-blue-700"
@@ -145,7 +145,7 @@ export default function Navbar() {
     (sectionId, label) => (
       <li>
         <button
-          className={`block px-4 py-2 hover:bg-gray-100 transition duration-300 ease-in-out w-full text-left font-serif italic ${
+          className={`block px-4 py-2 hover:bg-gray-100 transition duration-300 ease-in-out w-full text-left font-serif ${
             state.activeSubSection === sectionId ? "text-blue-600" : ""
           }`}
           onClick={() => handleNavigation(sectionId, true)}
@@ -221,7 +221,7 @@ export default function Navbar() {
                 >
                   <button
                     id="dropdownNavbarLink"
-                    className={`flex items-center justify-between w-full py-2 px-3 rounded md:p-0 md:w-auto transition duration-300 ease-in-out text-lg font-serif italic ${
+                    className={`flex items-center justify-between w-full py-2 px-3 rounded md:p-0 md:w-auto transition duration-300 ease-in-out text-lg font-serif ${
                       state.activeSection === "about"
                         ? "text-blue-600"
                         : "text-gray-900 hover:text-blue-700"
@@ -255,7 +255,7 @@ export default function Navbar() {
               <li>
                 <Link
                   to="/gallery"
-                  className={`block py-2 px-3 rounded md:p-0 transition duration-300 ease-in-out text-lg font-serif italic ${
+                  className={`block py-2 px-3 rounded md:p-0 transition duration-300 ease-in-out text-lg font-serif ${
                     state.activeSection === "gallery"
                       ? "text-blue-600"
                       : "text-gray-900 hover:text-blue-700"

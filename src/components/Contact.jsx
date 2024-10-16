@@ -21,13 +21,13 @@ export default function Contact() {
       <div className="container px-4 mx-auto sm:px-6 lg:px-8">
         <div className="lg:flex lg:items-center lg:-mx-6">
           <div className="lg:w-1/2 lg:mx-6">
-            <h2 className="text-3xl text-blue-600 mb-4 sm:text-4xl font-serif italic">
+            <h2 className="text-3xl text-blue-600 mb-4 sm:text-4xl font-serif">
               Contact us
             </h2>
-            <p className="text-xl text-gray-600 mb-8 font-serif italic">
+            <p className="text-xl text-gray-600 mb-8 font-serif">
               We&apos;d love to hear from you
             </p>
-            <p className="mt-4 text-gray-600 font-serif italic">
+            <p className="mt-4 text-gray-600 font-serif">
               Please fill out this form or reach out to us using the contact
               information below.
             </p>
@@ -60,7 +60,7 @@ export default function Contact() {
             </div>
 
             <div className="mt-6 md:mt-8">
-              <h3 className="text-gray-800 lext-lg font-bold font-serif italic">
+              <h3 className="text-gray-800 lext-lg font-bold font-serif">
                 Follow us
               </h3>
               <div className="flex mt-4 -mx-1.5">

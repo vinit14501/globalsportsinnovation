@@ -1,5 +1,3 @@
-import React from "react"
-
 export default function Services() {
   const services = [
     {
@@ -26,10 +24,10 @@ export default function Services() {
     >
       <div className="w-full max-w-screen-xl px-4 md:px-6 lg:px-8 mx-auto">
         <div className="mx-auto max-w-3xl text-center mb-12 md:mb-16">
-          <h2 className="text-blue-600 text-3xl sm:text-4xl leading-tight mb-4 font-serif italic">
+          <h2 className="text-blue-600 text-xl sm:text-4xl mb-4 font-serif">
             Services
           </h2>
-          <p className="text-gray-700 text-base sm:text-lg font-normal leading-relaxed font-serif italic">
+          <p className="text-gray-700 text-base sm:text-lg font-normal leading-relaxed font-serif">
             Crafting impactful strategies to elevate your presence on the global
             stage.
           </p>

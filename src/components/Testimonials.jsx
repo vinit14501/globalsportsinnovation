@@ -77,10 +77,10 @@ const Testimonials = () => {
     >
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 sm:mb-16 text-center">
-          <h2 className="text-3xl sm:text-4xl text-blue-600 mb-4 font-serif italic">
+          <h2 className="text-xl sm:text-4xl text-blue-600 mb-4 font-serif">
             TESTIMONIALS
           </h2>
-          <p className="text-base font-normal leading-relaxed sm:text-2xl text-gray-800 font-serif italic">
+          <p className="text-gray-700 text-4xl sm:text-lg font-medium font-serif">
             What our happy clients say!
           </p>
         </div>

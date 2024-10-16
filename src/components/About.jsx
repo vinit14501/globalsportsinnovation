@@ -1,5 +1,3 @@
-import React from "react"
-
 const listItems = [
   "Driving brand visibility and equity",
   "Campaign strategies in just 6 months",
@@ -17,7 +15,7 @@ export default function About() {
         <div className="w-full grid lg:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col justify-start lg:items-start items-center gap-8">
             <div className="w-full space-y-6">
-              <h2 className="text-blue-600 text-3xl sm:text-4xl leading-tight lg:text-start text-center font-serif italic">
+              <h2 className="text-blue-600 text-xl sm:text-4xl leading-tight lg:text-start text-center font-serif">
                 Why Global Sport Innovations?
               </h2>
               <p className="text-gray-700 text-base sm:text-lg font-normal leading-relaxed lg:text-start text-center font-serif">

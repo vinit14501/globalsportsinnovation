@@ -21,7 +21,7 @@ export default function Brand() {
       link: "#",
     },
     {
-      imageSrc: "pepsi.png",
+      imageSrc: "pepsi.svg",
       altText: "Pepsi",
       name: "Pepsi",
       link: "#",
@@ -36,10 +36,10 @@ export default function Brand() {
       <div className="w-full max-w-screen-xl px-4 md:px-6 lg:px-8 mx-auto">
         {" "}
         <div className="mx-auto max-w-3xl text-center mb-8 md:mb-12">
-          <h2 className="text-blue-600 text-3xl sm:text-4xl leading-tight mb-4 font-serif italic">
+          <h2 className="text-blue-600 text-xl sm:text-4xl leading-tight mb-4 font-serif">
             Clients Served
           </h2>
-          <p className="text-gray-700 text-base sm:text-lg font-normal leading-relaxed font-serif italic">
+          <p className="text-gray-700 text-base sm:text-lg font-normal leading-relaxed font-serif">
             Trusted by leading brands worldwide
           </p>
         </div>

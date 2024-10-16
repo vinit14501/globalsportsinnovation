@@ -35,12 +35,12 @@ const Footer = () => {
         >
           abc@info@gmail.com
         </ContactLink>
-        <ContactLink
+        {/* <ContactLink
           Icon={LinkedinIcon}
           href="#"
         >
           Follow us on LinkedIn
-        </ContactLink>
+        </ContactLink> */}
       </div>
     ),
     []
@@ -48,7 +48,7 @@ const Footer = () => {
 
   const memoizedCopyright = useMemo(
     () => (
-      <span className="text-md text-gray-800 dark:text-gray-400 font-serif italic">
+      <span className="text-md text-gray-800 dark:text-gray-400 font-serif">
         © {new Date().getFullYear()} Stawloom. All Rights Reserved.
       </span>
     ),

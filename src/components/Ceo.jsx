@@ -19,10 +19,10 @@ const Ceo = () => (
         <div className="lg:col-span-4 flex flex-col justify-start lg:items-start items-center">
           <div className="w-full space-y-5">
             <div className="space-y-1">
-              <h2 className="text-blue-600 text-3xl sm:text-4xl leading-tight lg:text-start text-center mb-4 font-serif italic">
+              <h2 className="text-blue-600 text-xl sm:text-4xl leading-tight lg:text-start text-center mb-4 font-serif">
                 Meet Our CEO
               </h2>
-              <p className="text-gray-700 text-2xl font-bold leading-normal lg:text-start text-center font-serif">
+              <p className="text-gray-700 text-xl font-bold leading-normal lg:text-start text-center font-serif italic">
                 Susan Goldsmith
               </p>
               <p className="text-gray-700 text-base sm:text-lg font-normal leading-relaxed lg:text-start text-center font-serif">
