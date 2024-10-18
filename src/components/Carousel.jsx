@@ -4,7 +4,7 @@ import SlidingContactForm from "./SlidingContactForm"
 
 const slides = [
   {
-    image: "carousel-1.jpg",
+    image: "carousel-3.jpg",
     title:
       "Are you a senior marketing executive leading Global Sports & Events partnerships?",
     buttonText: "Get a quote",
@@ -14,7 +14,7 @@ const slides = [
     title: "Empower your sports marketing and sponsorships with us",
   },
   {
-    image: "carousel-3.jpg",
+    image: "carousel-1.jpg",
     title: "Carve insight, innovation and impact to your strategy",
   },
 ]
