@@ -4,6 +4,23 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import SlidingContactForm from "./SlidingContactForm"
 import { useNavigation } from "../NavigationContext"
 
+// Updated utility function to get the current section based on scroll position
+const getCurrentSection = () => {
+  const sections = ["home", "about", "services", "clients", "contact"]
+  const subsections = ["story", "testimonial"]
+
+  for (const section of [...sections, ...subsections]) {
+    const element = document.getElementById(section)
+    if (element) {
+      const rect = element.getBoundingClientRect()
+      if (rect.top <= 100 && rect.bottom >= 100) {
+        return section
+      }
+    }
+  }
+  return "home" // Default to home if no section is found
+}
+
 export default function Navbar() {
   const { activeSection, setActiveSection } = useNavigation()
   const [state, setState] = useState({
@@ -46,6 +63,16 @@ export default function Navbar() {
       const currentScrollY = window.scrollY
       updateState({ isSticky: currentScrollY > lastScrollY.current })
       lastScrollY.current = currentScrollY
+
+      // Update active section based on scroll position
+      const newActiveSection = getCurrentSection()
+      if (["story", "testimonial"].includes(newActiveSection)) {
+        setActiveSection("about")
+        updateState({ activeSubSection: newActiveSection })
+      } else {
+        setActiveSection(newActiveSection)
+        updateState({ activeSubSection: "" })
+      }
     }
 
     const debouncedHandleScroll = debounce(handleScroll, 100)
@@ -57,7 +84,7 @@ export default function Navbar() {
       document.removeEventListener("mousedown", handleClickOutside)
       window.removeEventListener("scroll", debouncedHandleScroll)
     }
-  }, [updateState])
+  }, [updateState, setActiveSection])
 
   useEffect(() => {
     const hash = window.location.hash.replace("#", "")
