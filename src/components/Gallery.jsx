@@ -37,7 +37,9 @@ const Gallery = () => {
     "pic-10.jpeg",
     "pic-12.jpeg",
     "pic-13.JPG",
+    "pic-15.jpg",
     "pic-14.jpeg",
+    "pic-16.jpeg",
   ]
 
   const columns = 4
