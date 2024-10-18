@@ -1,15 +1,16 @@
-import React, { useState, useCallback, useEffect, useRef } from "react"
+import { useState, useCallback, useEffect, useRef } from "react"
 import { Menu, X, ChevronDown } from "lucide-react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import SlidingContactForm from "./SlidingContactForm"
+import { useNavigation } from "../NavigationContext"
 
 export default function Navbar() {
+  const { activeSection, setActiveSection } = useNavigation()
   const [state, setState] = useState({
     isAboutDropdownOpen: false,
     isMobileMenuOpen: false,
     isSticky: false,
     isContactFormOpen: false,
-    activeSection: "home",
     activeSubSection: "",
   })
 
@@ -60,21 +61,22 @@ export default function Navbar() {
 
   useEffect(() => {
     const hash = window.location.hash.replace("#", "")
-    updateState({
-      activeSection:
-        location.pathname === "/gallery" ? "gallery" : hash || "home",
-      activeSubSection: "",
-    })
-  }, [location.pathname, location.hash, updateState])
+    setActiveSection(
+      location.pathname === "/gallery" ? "gallery" : hash || "home"
+    )
+    updateState({ activeSubSection: "" })
+  }, [location.pathname, location.hash, setActiveSection, updateState])
 
   const handleNavigation = useCallback(
     (sectionId, isSubSection = false) => {
       updateState({
         isMobileMenuOpen: false,
         isAboutDropdownOpen: false,
-        activeSection: isSubSection ? "about" : sectionId,
         activeSubSection: isSubSection ? sectionId : "",
       })
+
+      const newActiveSection = isSubSection ? "about" : sectionId
+      setActiveSection(newActiveSection)
 
       const navigateToSection = () => {
         const section = document.getElementById(sectionId)
@@ -85,34 +87,33 @@ export default function Navbar() {
       }
 
       if (location.pathname === "/gallery") {
-        navigate("/")
-        setTimeout(navigateToSection, 100)
+        navigate("/", { state: { targetSection: newActiveSection } })
       } else if (location.pathname !== "/") {
         window.location.href = `/#${sectionId}`
       } else {
         navigateToSection()
       }
     },
-    [location.pathname, navigate, updateState]
+    [location.pathname, navigate, updateState, setActiveSection]
   )
 
   useEffect(() => {
     const handlePopState = () => {
       const hash = window.location.hash.replace("#", "")
       if (hash) {
-        updateState({ activeSection: hash })
+        setActiveSection(hash)
         const section = document.getElementById(hash)
         if (section) {
           section.scrollIntoView({ behavior: "smooth" })
         }
       } else {
-        updateState({ activeSection: "home" })
+        setActiveSection("home")
       }
     }
 
     window.addEventListener("popstate", handlePopState)
     return () => window.removeEventListener("popstate", handlePopState)
-  }, [updateState])
+  }, [setActiveSection])
 
   const handleKeyDown = useCallback(
     (event) => {
@@ -129,7 +130,7 @@ export default function Navbar() {
         <button
           onClick={() => handleNavigation(sectionId)}
           className={`block py-2 px-3 rounded md:p-0 transition duration-300 ease-in-out text-lg font-serif ${
-            state.activeSection === sectionId
+            activeSection === sectionId
               ? "text-blue-600"
               : "text-gray-900 hover:text-blue-700"
           }`}
@@ -138,7 +139,7 @@ export default function Navbar() {
         </button>
       </li>
     ),
-    [state.activeSection, handleNavigation]
+    [activeSection, handleNavigation]
   )
 
   const renderDropdownItem = useCallback(
@@ -156,6 +157,19 @@ export default function Navbar() {
     ),
     [state.activeSubSection, handleNavigation]
   )
+
+  useEffect(() => {
+    if (location.pathname === "/" && location.state?.targetSection) {
+      const targetSection = location.state.targetSection
+      setActiveSection(targetSection)
+      const section = document.getElementById(targetSection)
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" })
+      }
+      // Clear the state to avoid unwanted scrolling on subsequent renders
+      navigate("/", { state: null, replace: true })
+    }
+  }, [location, navigate, setActiveSection])
 
   return (
     <>
@@ -222,7 +236,7 @@ export default function Navbar() {
                   <button
                     id="dropdownNavbarLink"
                     className={`flex items-center justify-between w-full py-2 px-3 rounded md:p-0 md:w-auto transition duration-300 ease-in-out text-lg font-serif ${
-                      state.activeSection === "about"
+                      activeSection === "about"
                         ? "text-blue-600"
                         : "text-gray-900 hover:text-blue-700"
                     }`}
@@ -256,7 +270,7 @@ export default function Navbar() {
                 <Link
                   to="/gallery"
                   className={`block py-2 px-3 rounded md:p-0 transition duration-300 ease-in-out text-lg font-serif ${
-                    state.activeSection === "gallery"
+                    activeSection === "gallery"
                       ? "text-blue-600"
                       : "text-gray-900 hover:text-blue-700"
                   }`}

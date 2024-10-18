@@ -1,6 +1,7 @@
-import React, { useCallback, useMemo } from "react"
+import { useCallback, useMemo } from "react"
 import { LinkedinIcon, Mail } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
+import { useNavigation } from "../NavigationContext"
 
 const ContactLink = ({ Icon, href, children }) => (
   <div className="flex items-center space-x-3">
@@ -16,14 +17,16 @@ const ContactLink = ({ Icon, href, children }) => (
 
 const Footer = () => {
   const navigate = useNavigate()
+  const { setActiveSection } = useNavigation()
 
   const handleLogoClick = useCallback(
     (event) => {
       event.preventDefault()
       navigate("/")
+      setActiveSection("home")
       window.scrollTo(0, 0)
     },
-    [navigate]
+    [navigate, setActiveSection]
   )
 
   const memoizedContactLinks = useMemo(
