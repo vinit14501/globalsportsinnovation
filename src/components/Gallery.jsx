@@ -1,5 +1,3 @@
-import React from "react"
-
 const ImageItem = ({ src, alt = "" }) => (
   <div>
     <img
