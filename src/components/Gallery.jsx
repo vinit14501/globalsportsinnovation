@@ -1,102 +1,63 @@
 import React from "react"
 
-export default function Gallery() {
+const ImageItem = ({ src, alt = "" }) => (
+  <div>
+    <img
+      className="h-auto max-w-full rounded-lg"
+      src={src}
+      alt={alt}
+      loading="lazy"
+    />
+  </div>
+)
+
+const ImageColumn = ({ images }) => (
+  <div className="grid gap-4">
+    {images.map((src, index) => (
+      <ImageItem
+        key={index}
+        src={src}
+      />
+    ))}
+  </div>
+)
+
+const Gallery = () => {
+  const imageUrls = [
+    "pic-4.jpg",
+    "pic-5.jpeg",
+    "pic-2.jpeg",
+    "pic-3.jpeg",
+    "pic-7.jpg",
+    "pic-8.jpeg",
+    "pic-1.jpeg",
+    "pic-9.jpeg",
+    "pic-11.jpeg",
+    "pic-6.jpg",
+    "pic-10.jpeg",
+    "pic-12.jpeg",
+    "pic-13.JPG",
+    "pic-14.jpeg",
+  ]
+
+  const columns = 4
+  const imagesPerColumn = Math.ceil(imageUrls.length / columns)
+
   return (
     <div className="pt-24">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="grid gap-4">
-          <div>
-            <img
-              className="h-auto max-w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg"
-              alt=""
-            />
-          </div>
-          <div>
-            <img
-              className="h-auto max-w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg"
-              alt=""
-            />
-          </div>
-          <div>
-            <img
-              className="h-auto max-w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg"
-              alt=""
-            />
-          </div>
-        </div>
-        <div className="grid gap-4">
-          <div>
-            <img
-              className="h-auto max-w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg"
-              alt=""
-            />
-          </div>
-          <div>
-            <img
-              className="h-auto max-w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg"
-              alt=""
-            />
-          </div>
-          <div>
-            <img
-              className="h-auto max-w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg"
-              alt=""
-            />
-          </div>
-        </div>
-        <div className="grid gap-4">
-          <div>
-            <img
-              className="h-auto max-w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg"
-              alt=""
-            />
-          </div>
-          <div>
-            <img
-              className="h-auto max-w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg"
-              alt=""
-            />
-          </div>
-          <div>
-            <img
-              className="h-auto max-w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg"
-              alt=""
-            />
-          </div>
-        </div>
-        <div className="grid gap-4">
-          <div>
-            <img
-              className="h-auto max-w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg"
-              alt=""
-            />
-          </div>
-          <div>
-            <img
-              className="h-auto max-w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg"
-              alt=""
-            />
-          </div>
-          <div>
-            <img
-              className="h-auto max-w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg"
-              alt=""
-            />
-          </div>
-        </div>
+        {[...Array(columns)].map((_, columnIndex) => (
+          <ImageColumn
+            key={columnIndex}
+            images={imageUrls.slice(
+              columnIndex * imagesPerColumn,
+              (columnIndex + 1) * imagesPerColumn
+            )}
+          />
+        ))}
       </div>
     </div>
   )
 }
+
+export default Gallery
