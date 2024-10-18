@@ -1,4 +1,11 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+} from "react-router-dom"
 import About from "./components/About"
 import Brand from "./components/Brand"
 import Carousel from "./components/Carousel"
@@ -24,21 +31,52 @@ function MainPage() {
   )
 }
 
+function AppContent() {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [currentPath, setCurrentPath] = useState(location.pathname)
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname)
+    }
+
+    window.addEventListener("popstate", handlePopState)
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState)
+    }
+  }, [])
+
+  useEffect(() => {
+    setCurrentPath(location.pathname)
+  }, [location])
+
+  const renderContent = () => {
+    switch (currentPath) {
+      case "/":
+        return <MainPage />
+      case "/gallery":
+        return <Gallery />
+      default:
+        navigate("/")
+        return <MainPage />
+    }
+  }
+
+  return (
+    <>
+      <Navbar />
+      {renderContent()}
+      <Footer />
+    </>
+  )
+}
+
 function App() {
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route
-          path="/"
-          element={<MainPage />}
-        />
-        <Route
-          path="/gallery"
-          element={<Gallery />}
-        />
-      </Routes>
-      <Footer />
+      <AppContent />
     </Router>
   )
 }
