@@ -10,6 +10,11 @@ const slides = [
     buttonText: "Get a quote",
   },
   {
+    image: "carousel-4.jpg",
+    title:
+      "Are you a senior marketing executive leading Global Sports & Events partnerships?",
+  },
+  {
     image: "carousel-2.jpg",
     title: "Empower your sports marketing and sponsorships with us",
   },

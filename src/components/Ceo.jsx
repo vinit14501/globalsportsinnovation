@@ -9,7 +9,7 @@ const Ceo = () => (
           <div className="max-w-md mx-auto">
             <img
               className="w-full h-auto rounded-sm shadow-md transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-blue-100"
-              src="ceo.png"
+              src="ceo.jpg"
               alt="CEO Susan Goldsmith"
             />
           </div>

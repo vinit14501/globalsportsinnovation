@@ -1,13 +1,13 @@
 import { useCallback, useMemo } from "react"
-import { LinkedinIcon, Mail } from "lucide-react"
+import { Mail, Phone } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 import { useNavigation } from "../NavigationContext"
 
-const ContactLink = ({ Icon, href, children }) => (
+const ContactLink = ({ Icon, href, children, type }) => (
   <div className="flex items-center space-x-3">
     <Icon className="w-5 h-5 text-blue-600" />
     <a
-      href={href}
+      href={type === "email" ? `mailto:${href}` : `tel:${href}`}
       className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-600 transition-colors duration-300"
     >
       {children}
@@ -34,16 +34,18 @@ const Footer = () => {
       <div className="flex flex-col space-y-4">
         <ContactLink
           Icon={Mail}
-          href="#"
+          href="Susan.p.goldsmith@gmail.com"
+          type="email"
         >
-          abc@info@gmail.com
+          Susan.p.goldsmith@gmail.com
         </ContactLink>
-        {/* <ContactLink
-          Icon={LinkedinIcon}
-          href="#"
+        <ContactLink
+          Icon={Phone}
+          href="+1 719-330-4922"
+          type="phone"
         >
-          Follow us on LinkedIn
-        </ContactLink> */}
+          +1 719-330-4922
+        </ContactLink>
       </div>
     ),
     []
