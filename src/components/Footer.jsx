@@ -5,10 +5,12 @@ import { useNavigation } from "../NavigationContext"
 
 const ContactLink = ({ Icon, href, children, type }) => (
   <div className="flex items-center space-x-3">
-    <Icon className="w-5 h-5 text-blue-600" />
+    <Icon className="w-5 h-5 text-[#2c439c]" />
     <a
-      href={type === "email" ? `mailto:${href}` : `tel:${href}`}
-      className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-600 transition-colors duration-300"
+      href={
+        type === "email" ? `mailto:${href}` : `tel:${href.replace(/\s/g, "")}`
+      }
+      className="text-[#121212] dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-600 transition-colors duration-300"
     >
       {children}
     </a>
@@ -31,7 +33,7 @@ const Footer = () => {
 
   const memoizedContactLinks = useMemo(
     () => (
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-4 font-serif">
         <ContactLink
           Icon={Mail}
           href="Susan.p.goldsmith@gmail.com"
@@ -53,8 +55,9 @@ const Footer = () => {
 
   const memoizedCopyright = useMemo(
     () => (
-      <span className="text-md text-gray-800 dark:text-gray-400 font-serif">
-        © {new Date().getFullYear()} Stawloom. All Rights Reserved.
+      <span className="text-md text-[#121212] dark:text-gray-400 font-serif">
+        © {new Date().getFullYear()} Enlinque Consulting LLC. All Rights
+        Reserved.
       </span>
     ),
     []

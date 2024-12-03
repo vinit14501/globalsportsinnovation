@@ -6,21 +6,21 @@ const slides = [
   {
     image: "carousel-3.jpg",
     title:
-      "Are you a senior marketing executive leading Global Sports & Events partnerships?",
-    buttonText: "Get a quote",
+      "Are your sponsorships truly delivering the impact your brand deserves? ",
+    // buttonText: "Get a quote",
   },
   {
-    image: "carousel-4.jpg",
-    title:
-      "Are you a senior marketing executive leading Global Sports & Events partnerships?",
+    image: "carousel-5.jpg",
+    title: "30+ years, 15 Olympic Games—turning sponsorships into growth.",
   },
   {
     image: "carousel-2.jpg",
-    title: "Empower your sports marketing and sponsorships with us",
+    title: "Sponsorships should deliver results, not just visibility.",
   },
   {
     image: "carousel-1.jpg",
-    title: "Carve insight, innovation and impact to your strategy",
+    title:
+      "We help executives like you simplify complexities and maximize partnership potential.",
   },
 ]
 
@@ -33,7 +33,7 @@ export default function Carousel() {
 
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % slides.length)
-    }, 10000)
+    }, 20000)
 
     return () => clearInterval(interval)
   }, [isFormOpen])
@@ -61,7 +61,7 @@ export default function Carousel() {
           className="absolute block w-full h-full object-cover"
           alt=""
         />
-        <div className="absolute inset-0 flex flex-col justify-center bg-black bg-opacity-50 px-4 sm:px-6 lg:px-8">
+        <div className="absolute inset-0 flex flex-col justify-center bg-[#121212] bg-opacity-50 px-4 sm:px-6 lg:px-8">
           <div className="w-full md:w-2/3 lg:w-1/2 max-w-screen-xl mx-auto md:ml-8 lg:ml-16">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-2xl xl:text-3xl font-medium mb-6 text-white font-serif">
               {slide.title}
@@ -69,7 +69,7 @@ export default function Carousel() {
             {slide.buttonText && (
               <button
                 onClick={toggleForm}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-base sm:text-lg cursor-pointer font-serif"
+                className="bg-[#2c439c] hover:bg-blue-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-base sm:text-lg cursor-pointer font-serif"
               >
                 {slide.buttonText}
               </button>
@@ -87,7 +87,7 @@ export default function Carousel() {
         onClick={onClick}
         className={`absolute top-1/2 ${
           direction === "left" ? "left-2 sm:left-4" : "right-2 sm:right-4"
-        } transform -translate-y-1/2 bg-black bg-opacity-25 hover:bg-blue-600 text-white p-2 sm:p-3 rounded-full transition duration-300 cursor-pointer`}
+        } transform -translate-y-1/2 bg-[#121212] bg-opacity-25 hover:bg-blue-700 text-white p-2 sm:p-3 rounded-full transition duration-300 cursor-pointer`}
       >
         {direction === "left" ? (
           <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" />
@@ -106,7 +106,7 @@ export default function Carousel() {
         onClick={() => goToSlide(index)}
         className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 focus:outline-none cursor-pointer ${
           index === activeSlide
-            ? "bg-blue-600 scale-125"
+            ? "bg-[#2c439c] scale-125"
             : "bg-white hover:bg-blue-200"
         }`}
       />

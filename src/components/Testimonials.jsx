@@ -38,21 +38,21 @@ const testimonials = [
 ]
 
 const TestimonialCard = ({ text, name, position, avatar }) => (
-  <div className="group bg-white border border-solid border-gray-300 rounded-sm p-6 transition-all duration-500 w-full mx-auto hover:border-blue-600 hover:shadow-md">
-    <p className="text-base text-gray-700 leading-relaxed transition-all duration-500 mb-8 group-hover:text-gray-800 font-serif">
+  <div className="group bg-white border border-solid border-[#121212] rounded-sm p-6 transition-all duration-500 w-full mx-auto hover:border-[#2c439c] hover:shadow-md">
+    <p className="text-base text-[#121212] leading-relaxed transition-all duration-500 mb-8 group-hover:text-[#121212] font-serif">
       {text}
     </p>
-    <div className="flex items-center gap-4 border-t border-solid border-gray-200 pt-5">
+    <div className="flex items-center gap-4 border-t border-solid border-[#121212] pt-5">
       <img
         className="rounded-full h-12 w-12 object-cover"
         src={avatar}
         alt={`${name}'s avatar`}
       />
       <div>
-        <h5 className="text-gray-800 font-bold transition-all duration-500 mb-1 font-serif">
+        <h5 className="text-[#121212] font-bold transition-all duration-500 mb-1 font-serif">
           {name}
         </h5>
-        <span className="text-sm leading-4 text-gray-700 font-serif">
+        <span className="text-sm leading-4 text-[#121212] font-serif">
           {position}
         </span>
       </div>
@@ -77,10 +77,10 @@ const Testimonials = () => {
     >
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 sm:mb-16 text-center">
-          <h2 className="text-xl sm:text-4xl text-blue-600 mb-4 font-serif">
+          <h2 className="text-xl sm:text-4xl text-[#2c439c] mb-4 font-serif font-bold">
             TESTIMONIALS
           </h2>
-          <p className="text-gray-700 text-4xl sm:text-lg font-medium font-serif">
+          <p className="text-[#121212] text-4xl sm:text-lg font-medium font-serif">
             What our happy clients say!
           </p>
         </div>
@@ -113,10 +113,7 @@ const Testimonials = () => {
           ))}
         </Swiper>
       </div>
-      <style
-        jsx
-        global
-      >{`
+      <style>{`
         .swiper-pagination-bullet {
           width: 8px;
           height: 8px;
@@ -124,7 +121,7 @@ const Testimonials = () => {
           opacity: 1;
         }
         .swiper-pagination-bullet-active {
-          background: #2563eb;
+          background: #2c439c;
           width: 24px;
           border-radius: 4px;
         }

@@ -1,25 +1,35 @@
+import React from "react"
+
 const listItems = [
-  "Driving brand visibility and equity",
-  "Campaign strategies in just 6 months",
-  "Results-driven plan",
-  "Optimize ROI",
+  {
+    header: "Olympic & Global Sports Expertise",
+  },
+  {
+    header: "Global Brand Marketing & Sponsorship Management",
+  },
+  {
+    header: "Innovative Thinking",
+  },
+  {
+    header: "Collaborative Leadership",
+  },
 ]
 
 export default function About() {
   return (
     <section
       id="about"
-      className="py-24 bg-gradient-to-b from-white to-gray-100"
+      className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-100"
     >
       <div className="w-full max-w-screen-xl px-4 md:px-6 lg:px-8 mx-auto">
-        <div className="w-full grid lg:grid-cols-2 gap-12 items-center">
-          <div className="flex flex-col justify-start lg:items-start items-center gap-8">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="flex flex-col justify-start lg:items-start items-center">
             <div className="w-full space-y-6">
-              <h2 className="text-blue-600 text-xl sm:text-4xl leading-tight lg:text-start text-center font-serif">
+              <h2 className="text-[#2c439c] text-2xl sm:text-4xl leading-tight lg:text-start text-center font-serif font-bold">
                 Why Global Sport Innovations?
               </h2>
-              <p className="text-gray-700 text-base sm:text-lg font-normal leading-relaxed lg:text-start text-center font-serif">
-                GSI empowers sports sponsors to create innovative and dynamic
+              <p className="text-[#121212] text-base sm:text-lg font-normal leading-relaxed lg:text-start text-center font-serif">
+                Empowering sports sponsors to create innovative and dynamic
                 campaign strategies without getting lost in complex ecosystems.
                 It&apos;s about creating meaningful connections, driving brand
                 visibility, and growing your business.
@@ -35,17 +45,19 @@ export default function About() {
                       alt="Blue Tick"
                       className="w-6 h-6 flex-shrink-0"
                     />
-                    <span className="text-gray-800 text-base sm:text-lg font-medium">
-                      {item}
-                    </span>
+                    <div>
+                      <h3 className="text-[#121212] text-lg font-semibold">
+                        {item.header}
+                      </h3>
+                    </div>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
-          <div className="w-full h-full">
+          <div className="w-full flex items-center justify-center">
             <img
-              className="w-full h-auto rounded-sm object-cover shadow-xl"
+              className="w-full max-w-[450px] h-auto aspect-square object-cover rounded-sm shadow-lg"
               src="about.png"
               alt="About Us"
             />

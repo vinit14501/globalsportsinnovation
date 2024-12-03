@@ -1,19 +1,19 @@
 export default function Services() {
   const services = [
     {
-      title: "Workshop",
+      title: "Strategic Sponsorship Advisory",
       description:
-        "GSI provides comprehensive workshops to help sports sponsors develop innovative and dynamic campaign strategies. Our workshops are designed to empower you with the knowledge and tools needed to navigate the complex world of sports sponsorship effectively.",
+        "Leverage 30+ years of expertise, including 15 Olympic Games, to guide sponsors in navigating the complexities of global sports partnerships. We align your sponsorship goals with strategic opportunities, ensuring clear direction, effective investments, and measurable results.",
     },
     {
-      title: "Olympics 101 Playbook",
+      title: "Innovative Activation Strategies",
       description:
-        "Our Olympics 101 Playbook is a comprehensive guide that breaks down the intricacies of Olympic sponsorship. It provides valuable insights into creating impactful campaigns that resonate with the global audience of the Olympic Games.",
+        "Transform sponsorships into bold, engaging experiences that connect brands and audiences on a deeper level. By crafting creative, forward-thinking activation plans, we help your brand break through the clutter and deliver memorable, impactful engagements.",
     },
     {
-      title: "Brand 101 Summary",
+      title: "Seamless Optimization",
       description:
-        "The Brand 101 Summary is a tailored report that analyzes your brand's potential in the sports sponsorship landscape. It offers strategic recommendations to enhance your brand visibility and equity through targeted sports marketing initiatives.",
+        "From idea to impact, we guide you to flawless integration and execution planning across every sponsorship touchpoint. Through collaboration, precision, and trusted relationships, we ensure your campaigns are set up for success as a leader in global sports marketing.",
     },
   ]
 
@@ -24,12 +24,13 @@ export default function Services() {
     >
       <div className="w-full max-w-screen-xl px-4 md:px-6 lg:px-8 mx-auto">
         <div className="mx-auto max-w-3xl text-center mb-12 md:mb-16">
-          <h2 className="text-blue-600 text-xl sm:text-4xl mb-4 font-serif">
+          <h2 className="text-[#2c439c] text-xl font-bold sm:text-4xl mb-4 font-serif">
             Services
           </h2>
-          <p className="text-gray-700 text-base sm:text-lg font-normal leading-relaxed font-serif">
-            Crafting impactful strategies to elevate your presence on the global
-            stage.
+          <p className="text-[#121212] text-base sm:text-lg font-normal leading-relaxed font-serif">
+            Transform your sponsorship strategy with innovative solutions
+            designed to elevate your brand, captivate your audience, and deliver
+            measurable results.
           </p>
         </div>
 
@@ -40,10 +41,10 @@ export default function Services() {
               className="bg-white rounded-sm shadow-md overflow-hidden transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-blue-100 hover:-translate-y-1"
             >
               <div className="p-6">
-                <h3 className="text-gray-800 text-center text-xl font-semibold mb-2 font-serif">
+                <h3 className="text-[#121212] text-center text-xl font-semibold mb-2 font-serif">
                   {service.title}
                 </h3>
-                <p className="text-gray-700 text-base font-normal font-serif">
+                <p className="text-[#121212] text-base font-normal font-serif">
                   {service.description}
                 </p>
               </div>

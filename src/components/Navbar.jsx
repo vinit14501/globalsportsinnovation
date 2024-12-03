@@ -4,9 +4,15 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import SlidingContactForm from "./SlidingContactForm"
 import { useNavigation } from "../NavigationContext"
 
-// Updated utility function to get the current section based on scroll position
 const getCurrentSection = () => {
-  const sections = ["home", "about", "services", "clients", "contact"]
+  const sections = [
+    "home",
+    "about",
+    "services",
+    "clients",
+    "contact",
+    "gallery",
+  ]
   const subsections = ["story", "testimonial"]
 
   for (const section of [...sections, ...subsections]) {
@@ -18,7 +24,7 @@ const getCurrentSection = () => {
       }
     }
   }
-  return "home" // Default to home if no section is found
+  return "home"
 }
 
 export default function Navbar() {
@@ -64,7 +70,6 @@ export default function Navbar() {
       updateState({ isSticky: currentScrollY > lastScrollY.current })
       lastScrollY.current = currentScrollY
 
-      // Update active section based on scroll position
       const newActiveSection = getCurrentSection()
       if (["story", "testimonial"].includes(newActiveSection)) {
         setActiveSection("about")
@@ -86,14 +91,6 @@ export default function Navbar() {
     }
   }, [updateState, setActiveSection])
 
-  useEffect(() => {
-    const hash = window.location.hash.replace("#", "")
-    setActiveSection(
-      location.pathname === "/gallery" ? "gallery" : hash || "home"
-    )
-    updateState({ activeSubSection: "" })
-  }, [location.pathname, location.hash, setActiveSection, updateState])
-
   const handleNavigation = useCallback(
     (sectionId, isSubSection = false) => {
       updateState({
@@ -108,13 +105,20 @@ export default function Navbar() {
       const navigateToSection = () => {
         const section = document.getElementById(sectionId)
         if (section) {
-          section.scrollIntoView({ behavior: "smooth" })
+          setTimeout(() => {
+            section.scrollIntoView({ behavior: "smooth" })
+          }, 100)
         }
         window.history.pushState(null, "", `/#${sectionId}`)
       }
 
       if (location.pathname === "/gallery") {
-        navigate("/", { state: { targetSection: newActiveSection } })
+        navigate("/", {
+          state: {
+            targetSection: sectionId,
+            fromPath: location.pathname,
+          },
+        })
       } else if (location.pathname !== "/") {
         window.location.href = `/#${sectionId}`
       } else {
@@ -142,6 +146,23 @@ export default function Navbar() {
     return () => window.removeEventListener("popstate", handlePopState)
   }, [setActiveSection])
 
+  useEffect(() => {
+    if (location.pathname === "/" && location.state?.targetSection) {
+      const { targetSection, fromPath } = location.state
+      setActiveSection(targetSection)
+      const section = document.getElementById(targetSection)
+
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" })
+      }
+
+      navigate("/", {
+        state: null,
+        replace: true,
+      })
+    }
+  }, [location, navigate, setActiveSection])
+
   const handleKeyDown = useCallback(
     (event) => {
       if (event.key === "Escape") {
@@ -158,8 +179,8 @@ export default function Navbar() {
           onClick={() => handleNavigation(sectionId)}
           className={`block py-2 px-3 rounded md:p-0 transition duration-300 ease-in-out text-lg font-serif ${
             activeSection === sectionId
-              ? "text-blue-600"
-              : "text-gray-900 hover:text-blue-700"
+              ? "text-[#2c439c]"
+              : "text-[#121212] hover:text-blue-700"
           }`}
         >
           {label}
@@ -173,8 +194,8 @@ export default function Navbar() {
     (sectionId, label) => (
       <li>
         <button
-          className={`block px-4 py-2 hover:bg-gray-100 transition duration-300 ease-in-out w-full text-left font-serif ${
-            state.activeSubSection === sectionId ? "text-blue-600" : ""
+          className={`block px-4 py-2 hover:bg-[#F3F4F6] transition duration-300 ease-in-out w-full text-left font-serif ${
+            state.activeSubSection === sectionId ? "text-[#2c439c]" : ""
           }`}
           onClick={() => handleNavigation(sectionId, true)}
         >
@@ -185,24 +206,11 @@ export default function Navbar() {
     [state.activeSubSection, handleNavigation]
   )
 
-  useEffect(() => {
-    if (location.pathname === "/" && location.state?.targetSection) {
-      const targetSection = location.state.targetSection
-      setActiveSection(targetSection)
-      const section = document.getElementById(targetSection)
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" })
-      }
-      // Clear the state to avoid unwanted scrolling on subsequent renders
-      navigate("/", { state: null, replace: true })
-    }
-  }, [location, navigate, setActiveSection])
-
   return (
     <>
       <nav
         ref={navRef}
-        className={`bg-white fixed w-full z-40 top-0 left-0 border-b border-gray-200 shadow-md transition-all duration-300 ${
+        className={`bg-[#FFFFFF] fixed w-full z-40 top-0 left-0 border-b border-[#E5E7EB] shadow-md transition-all duration-300 ${
           state.isSticky ? "py-2" : "py-4"
         }`}
         onKeyDown={handleKeyDown}
@@ -227,7 +235,7 @@ export default function Navbar() {
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <button
               type="button"
-              className="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm px-5 py-2.5 text-center transition duration-300 ease-in-out transform hover:scale-105 font-serif font-bold"
+              className="text-white bg-[#2c439c] hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-[#93C5FD] rounded-lg text-sm px-5 py-2.5 text-center transition duration-300 ease-in-out transform hover:scale-105 font-serif font-bold"
               onClick={() => toggleState("isContactFormOpen")}
             >
               Book Now
@@ -235,7 +243,7 @@ export default function Navbar() {
             <button
               onClick={() => toggleState("isMobileMenuOpen")}
               type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 font-serif"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-[#121212] rounded-lg md:hidden hover:bg-[#F3F4F6] focus:outline-none focus:ring-2 focus:ring-[#D1D5DB] font-serif"
               aria-controls="navbar-sticky"
               aria-expanded={state.isMobileMenuOpen}
             >
@@ -253,7 +261,7 @@ export default function Navbar() {
             } items-center justify-between w-full md:flex md:w-auto md:order-1 transition-all duration-300 ease-in-out`}
             id="navbar-sticky"
           >
-            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
+            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-[#E5E7EB] rounded-lg bg-[#F9FAFB] md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-[#FFFFFF]">
               {renderNavItem("home", "Home")}
               <li>
                 <div
@@ -264,8 +272,8 @@ export default function Navbar() {
                     id="dropdownNavbarLink"
                     className={`flex items-center justify-between w-full py-2 px-3 rounded md:p-0 md:w-auto transition duration-300 ease-in-out text-lg font-serif ${
                       activeSection === "about"
-                        ? "text-blue-600"
-                        : "text-gray-900 hover:text-blue-700"
+                        ? "text-[#2c439c]"
+                        : "text-[#1F2937] hover:text-blue-700"
                     }`}
                     onClick={toggleAboutDropdown}
                     aria-expanded={state.isAboutDropdownOpen}
@@ -274,14 +282,14 @@ export default function Navbar() {
                   </button>
                   <div
                     id="dropdownNavbar"
-                    className={`absolute z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 transition-all duration-300 ease-in-out ${
+                    className={`absolute z-10 font-normal bg-[#FFFFFF] divide-y divide-[#E5E7EB] rounded-lg shadow-lg w-44 transition-all duration-300 ease-in-out ${
                       state.isAboutDropdownOpen
                         ? "opacity-100 visible transform translate-y-0"
                         : "opacity-0 invisible transform -translate-y-2"
                     }`}
                   >
                     <ul
-                      className="py-2 text-sm text-gray-700"
+                      className="py-2 text-sm text-[#4B5563]"
                       aria-labelledby="dropdownLargeButton"
                     >
                       {renderDropdownItem("about", "Why GSI")}
@@ -298,9 +306,10 @@ export default function Navbar() {
                   to="/gallery"
                   className={`block py-2 px-3 rounded md:p-0 transition duration-300 ease-in-out text-lg font-serif ${
                     activeSection === "gallery"
-                      ? "text-blue-600"
-                      : "text-gray-900 hover:text-blue-700"
+                      ? "text-[#2c439c]"
+                      : "text-[#121212] hover:text-blue-700"
                   }`}
+                  onClick={() => setActiveSection("gallery")}
                 >
                   Gallery
                 </Link>
@@ -318,7 +327,6 @@ export default function Navbar() {
   )
 }
 
-// Utility function for debouncing
 function debounce(func, wait) {
   let timeout
   return function executedFunction(...args) {

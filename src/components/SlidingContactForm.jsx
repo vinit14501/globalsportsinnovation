@@ -3,7 +3,7 @@ import { X } from "lucide-react"
 
 const InputField = ({ label, type, placeholder, value, onChange, name }) => (
   <div className="mb-6">
-    <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+    <label className="block mb-2 text-sm font-medium font-serif text-[#121212] dark:text-gray-300">
       {label}
     </label>
     <input
@@ -12,7 +12,7 @@ const InputField = ({ label, type, placeholder, value, onChange, name }) => (
       value={value}
       onChange={onChange}
       name={name}
-      className="w-full px-4 py-3 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:focus:ring-blue-400"
+      className="w-full px-4 py-3 text-[#121212] bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:focus:ring-blue-400"
     />
   </div>
 )
@@ -62,22 +62,22 @@ const SlidingContactForm = ({ isOpen, onClose }) => {
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-end">
+    <div className="fixed inset-0 bg-[#121212] bg-opacity-50 z-50 flex justify-end">
       <div
-        className="w-full sm:w-96 bg-white dark:bg-gray-900 shadow-lg h-full overflow-y-auto p-8 transform transition-transform duration-300 ease-in-out"
+        className="w-full sm:w-96 bg-white dark:bg-[#121212] shadow-lg h-full overflow-y-auto p-8 transform transition-transform duration-300 ease-in-out"
         style={{ transform: isOpen ? "translateX(0)" : "translateX(100%)" }}
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100"
+          className="absolute top-4 right-4 text-[#121212] hover:text-[#121212] dark:text-gray-300 dark:hover:text-gray-100"
         >
           <X className="w-6 h-6" />
         </button>
-        <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
+        <h2 className="text-3xl font-bold font-serif text-[#121212] dark:text-white mb-4">
           Get in Touch
         </h2>
-        <p className="text-xl font-bold text-blue-600 mb-8">
-          We'd love to hear from you
+        <p className="text-xl font-bold font-serif text-[#2c439c] mb-8">
+          We&apos;d love to hear from you
         </p>
         <form onSubmit={handleSubmit}>
           <InputField
@@ -97,11 +97,11 @@ const SlidingContactForm = ({ isOpen, onClose }) => {
             onChange={handleInputChange}
           />
           <div className="mb-6">
-            <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label className="block mb-2 text-sm font-medium font-serif text-[#121212] dark:text-gray-300">
               Message
             </label>
             <textarea
-              className="w-full px-4 py-3 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:focus:ring-blue-400"
+              className="w-full px-4 py-3 text-[#121212] bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:focus:ring-blue-400"
               rows="5"
               placeholder="Your message here..."
               name="message"
@@ -111,7 +111,7 @@ const SlidingContactForm = ({ isOpen, onClose }) => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 mb-6"
+            className="w-full bg-[#2c439c] text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 mb-6"
           >
             Send Message
           </button>
@@ -119,7 +119,7 @@ const SlidingContactForm = ({ isOpen, onClose }) => {
         <div className="flex justify-center">
           <button
             onClick={handleLinkedInClick}
-            className="bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            className="bg-[#2c439c] text-white p-2 rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

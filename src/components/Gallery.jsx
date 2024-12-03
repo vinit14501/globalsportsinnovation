@@ -44,7 +44,10 @@ const Gallery = () => {
   const imagesPerColumn = Math.ceil(imageUrls.length / columns)
 
   return (
-    <div className="pt-24">
+    <div
+      id="gallery"
+      className="pt-24"
+    >
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[...Array(columns)].map((_, columnIndex) => (
           <ImageColumn

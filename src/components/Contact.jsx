@@ -20,52 +20,60 @@ export default function Contact() {
       <div className="container px-4 mx-auto sm:px-6 lg:px-8">
         <div className="lg:flex lg:items-center lg:-mx-6">
           <div className="lg:w-1/2 lg:mx-6">
-            <h2 className="text-3xl text-blue-600 mb-4 sm:text-4xl font-serif">
+            <h2 className="text-3xl text-[#2c439c] mb-4 sm:text-4xl font-bold font-serif">
               Contact us
             </h2>
-            <p className="text-xl text-gray-600 mb-8 font-serif">
-              We&apos;d love to hear from you
+            <p className="text-base text-[#121212] mb-8 font-serif">
+              Your next sponsorship can be more than a campaign—it can be a
+              legacy. Bold ideas, measurable outcomes, and impactful
+              partnerships start here.
             </p>
-            <p className="mt-4 text-gray-600 font-serif">
+            <p className="text-base mt-0 text-[#121212] mb-3 font-serif">
+              Ready to ignite your investment and leave a lasting impression?
+            </p>
+            <p className="text-base mt-0 text-[#121212] mb-3 font-serif">
+              Let’s start the conversation today.
+            </p>
+            {/* <p className="mt-4 text-[#121212] font-serif">
               Please fill out this form or reach out to us using the contact
               information below.
-            </p>
+            </p> */}
 
             <div className="mt-6 space-y-8">
-              <div className="flex items-center space-x-3">
-                <MapPin className="w-5 h-5 text-blue-600" />
-                <span className="text-gray-700 font-serif">
+              {/* <div className="flex items-center space-x-3">
+                <MapPin className="w-5 h-5 text-[#2c439c]" />
+                <span className="text-[#121212] font-serif">
                   711-2880 Nulla St. Mankato Mississippi 96522
                 </span>
-              </div>
+              </div> */}
               <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-blue-600" />
+                <Phone className="w-5 h-5 text-[#2c439c]" />
                 <a
-                  href="tel:+12575637401"
-                  className="text-gray-700 font-serif hover:text-blue-600"
+                  href="tel:+17193304922"
+                  className="text-[#121212] font-serif hover:text-blue-700"
                 >
-                  (257) 563-7401
+                  +1 719-330-4922
                 </a>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-blue-600" />
+                <Mail className="w-5 h-5 text-[#2c439c]" />
                 <a
-                  href="mailto:info@example.com"
-                  className="text-gray-700 font-serif hover:text-blue-600"
+                  href="mailto:Susan.p.goldsmith@gmail.com"
+                  className="text-[#121212] font-serif hover:text-blue-700"
                 >
-                  info@example.com
+                  Susan.p.goldsmith@gmail.com
                 </a>
               </div>
             </div>
 
             <div className="mt-6 md:mt-8">
-              <h3 className="text-gray-800 lext-lg font-bold font-serif">
+              <h3 className="text-[#121212] lext-lg font-bold font-serif">
                 Follow us
               </h3>
               <div className="flex mt-4 -mx-1.5">
                 <a
-                  className="mx-1.5 text-blue-600"
-                  href="#"
+                  className="mx-1.5 text-[#2c439c]"
+                  href="www.linkedin.com/in/susangoldsmith"
                   aria-label="LinkedInIcon"
                 >
                   <LinkedInIcon className="w-8 h-8" />
@@ -76,7 +84,7 @@ export default function Contact() {
 
           <div className="mt-8 lg:w-1/2 lg:mx-6">
             <div className="w-full px-8 py-10 mx-auto overflow-hidden bg-white shadow-2xl rounded-xl dark:bg-gray-900 lg:max-w-xl">
-              <h3 className="text-2xl font-bold text-blue-600 mb-4 font-serif">
+              <h3 className="text-2xl font-bold text-[#2c439c] mb-4 font-serif">
                 Get in touch
               </h3>
 
@@ -85,7 +93,7 @@ export default function Contact() {
                   <div className="mb-4">
                     <label
                       htmlFor="fullName"
-                      className="block mb-2 text-md font-medium text-gray-700 font-serif"
+                      className="block mb-2 text-md font-medium text-[#121212] font-serif"
                     >
                       Full Name
                     </label>
@@ -94,13 +102,13 @@ export default function Contact() {
                       id="fullName"
                       name="fullName"
                       placeholder="John Doe"
-                      className="w-full px-3 py-2 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-blue-600 font-serif"
+                      className="w-full px-3 py-2 text-[#121212] bg-white border rounded-md focus:outline-none focus:border-[#2c439c] font-serif"
                     />
                   </div>
                   <div className="mb-4">
                     <label
                       htmlFor="email"
-                      className="block mb-2 text-md font-medium text-gray-700 font-serif"
+                      className="block mb-2 text-md font-medium text-[#121212] font-serif"
                     >
                       Email address
                     </label>
@@ -109,7 +117,7 @@ export default function Contact() {
                       id="email"
                       name="email"
                       placeholder="johndoe@example.com"
-                      className="w-full px-3 py-2 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-blue-600 font-serif"
+                      className="w-full px-3 py-2 text-[#121212] bg-white border rounded-md focus:outline-none focus:border-[#2c439c] font-serif"
                     />
                   </div>
                 </div>
@@ -117,7 +125,7 @@ export default function Contact() {
                 <div className="w-full mt-6">
                   <label
                     htmlFor="message"
-                    className="block mb-2 text-md font-medium text-gray-700 font-serif"
+                    className="block mb-2 text-md font-medium text-[#121212] font-serif"
                   >
                     Message
                   </label>
@@ -125,12 +133,11 @@ export default function Contact() {
                     id="message"
                     name="message"
                     placeholder="Your message here..."
-                    className="w-full px-3 py-2 text-gray-700 bg-white border rounded-md focus:outline-none focus:border-blue-600 font-serif"
-                    // className="block w-full h-32 px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-blue-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-40"
+                    className="w-full px-3 py-2 text-[#121212] bg-white border rounded-md focus:outline-none focus:border-[#2c439c] font-serif"
                   ></textarea>
                 </div>
 
-                <button className="w-full px-6 py-3 mt-6 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50">
+                <button className="w-full px-6 py-3 mt-6 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-[#2c439c] rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-[#2c439c] focus:ring-opacity-50">
                   Send Message
                 </button>
               </form>
