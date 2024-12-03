@@ -11,16 +11,16 @@ const slides = [
   },
   {
     image: "carousel-5.jpg",
-    title: "30+ years, 15 Olympic Games—turning sponsorships into growth.",
+    title: "30+ years, 15 Olympic Games—turning sponsorships into growth",
   },
   {
     image: "carousel-2.jpg",
-    title: "Sponsorships should deliver results, not just visibility.",
+    title: "Sponsorships should deliver results, not just visibility",
   },
   {
     image: "carousel-1.jpg",
     title:
-      "We help executives like you simplify complexities and maximize partnership potential.",
+      "We help executives like you simplify complexities and maximize partnership potential",
   },
 ]
 
