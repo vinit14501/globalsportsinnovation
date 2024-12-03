@@ -2,7 +2,6 @@ import React, { useMemo, useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-// Utility hook for responsive design
 const useResponsiveSlides = (itemCount, baseItemsPerSlide = 4) => {
   const getResponsiveItemCount = useCallback(() => {
     if (typeof window === "undefined") return baseItemsPerSlide
@@ -13,7 +12,6 @@ const useResponsiveSlides = (itemCount, baseItemsPerSlide = 4) => {
 
   const [itemsPerSlide, setItemsPerSlide] = useState(getResponsiveItemCount)
 
-  // Add event listener for resize (if used in client-side rendering)
   React.useEffect(() => {
     const handleResize = () => setItemsPerSlide(getResponsiveItemCount())
     window.addEventListener("resize", handleResize)
@@ -25,9 +23,7 @@ const useResponsiveSlides = (itemCount, baseItemsPerSlide = 4) => {
   return { itemsPerSlide, totalSlides }
 }
 
-// Brands Carousel Component
 const Brand = () => {
-  // Comprehensive brand data
   const brandsData = useMemo(
     () => [
       { id: 1, logo: "usa.jpg" },
@@ -50,11 +46,9 @@ const Brand = () => {
     []
   )
 
-  // State and navigation
   const [currentSlide, setCurrentSlide] = useState(0)
   const { itemsPerSlide, totalSlides } = useResponsiveSlides(brandsData.length)
 
-  // Slide navigation handlers
   const handleNextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % totalSlides)
   }, [totalSlides])
@@ -63,7 +57,6 @@ const Brand = () => {
     setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides)
   }, [totalSlides])
 
-  // Render logo variant
   const renderLogoVariant = useCallback(
     (brand) => (
       <motion.div
@@ -93,7 +86,6 @@ const Brand = () => {
     []
   )
 
-  // Rendering logic
   const renderItems = useMemo(() => {
     const startIndex = currentSlide * itemsPerSlide
     const endIndex = startIndex + itemsPerSlide
@@ -105,15 +97,13 @@ const Brand = () => {
   return (
     <section
       id="clients"
-      className="py-16 bg-gradient-to-br from-gray-50 to-blue-50"
+      className="pt-28 pb-16 bg-gradient-to-br from-gray-50 to-blue-50"
     >
       <div className="container mx-auto px-4">
-        {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-xl sm:text-4xl font-bold text-[#2c439c] mb-4 font-serif">
             Clients
           </h2>
-          {/* Description */}
           <p className="text-[#121212] max-w-2xl mx-auto text-base sm:text-lg font-normal leading-relaxed font-serif">
             We collaborate with industry-leading brands to deliver innovative
             solutions and drive transformative partnerships across global
@@ -121,9 +111,7 @@ const Brand = () => {
           </p>
         </div>
 
-        {/* Carousel Container */}
         <div className="relative group">
-          {/* Navigation Buttons */}
           <div className="absolute inset-y-0 left-0 flex items-center z-10 -translate-x-1/2">
             <button
               onClick={handlePrevSlide}
@@ -144,7 +132,6 @@ const Brand = () => {
             </button>
           </div>
 
-          {/* Carousel Grid */}
           <div className="overflow-hidden">
             <AnimatePresence mode="popLayout">
               <motion.div
@@ -158,7 +145,6 @@ const Brand = () => {
             </AnimatePresence>
           </div>
 
-          {/* Slide Indicators */}
           <div className="flex justify-center mt-8 space-x-2">
             {[...Array(totalSlides)].map((_, index) => (
               <button
