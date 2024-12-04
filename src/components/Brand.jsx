@@ -39,7 +39,7 @@ const Brand = () => {
       { id: 11, logo: "salt-lake.jpg" },
       { id: 12, logo: "samsung.jpg" },
       { id: 13, logo: "ge.png" },
-      { id: 14, logo: "csm.png" },
+      { id: 14, logo: "rings.png" },
       { id: 15, logo: "coke.jpg" },
       { id: 16, logo: "nike.png" },
     ],

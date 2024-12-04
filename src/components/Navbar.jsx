@@ -292,7 +292,7 @@ export default function Navbar() {
                       className="py-2 text-sm text-[#4B5563]"
                       aria-labelledby="dropdownLargeButton"
                     >
-                      {renderDropdownItem("about", "Why GSI")}
+                      {renderDropdownItem("about", "Why US")}
                       {renderDropdownItem("story", "Story")}
                       {renderDropdownItem("testimonial", "Testimonials")}
                     </ul>
