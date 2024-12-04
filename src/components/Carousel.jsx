@@ -33,7 +33,7 @@ export default function Carousel() {
 
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % slides.length)
-    }, 20000)
+    }, 10000)
 
     return () => clearInterval(interval)
   }, [isFormOpen])
