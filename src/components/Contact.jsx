@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail } from "lucide-react"
+import { Phone, Mail } from "lucide-react"
 
 const LinkedInIcon = ({ className }) => (
   <svg
@@ -32,20 +32,10 @@ export default function Contact() {
               Ready to ignite your investment and leave a lasting impression?
             </p>
             <p className="text-base mt-0 text-[#121212] mb-3 font-serif">
-              Let’s start the conversation today.
+              Let&apos;s start the conversation today.
             </p>
-            {/* <p className="mt-4 text-[#121212] font-serif">
-              Please fill out this form or reach out to us using the contact
-              information below.
-            </p> */}
 
             <div className="mt-6 space-y-8">
-              {/* <div className="flex items-center space-x-3">
-                <MapPin className="w-5 h-5 text-[#2c439c]" />
-                <span className="text-[#121212] font-serif">
-                  711-2880 Nulla St. Mankato Mississippi 96522
-                </span>
-              </div> */}
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-[#2c439c]" />
                 <a
@@ -73,7 +63,9 @@ export default function Contact() {
               <div className="flex mt-4 -mx-1.5">
                 <a
                   className="mx-1.5 text-[#2c439c]"
-                  href="www.linkedin.com/in/susangoldsmith"
+                  href="https://www.linkedin.com/in/susangoldsmith"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="LinkedInIcon"
                 >
                   <LinkedInIcon className="w-8 h-8" />
