@@ -1,4 +1,16 @@
+import { useState } from "react"
 import { Phone, Mail } from "lucide-react"
+import { useForm } from "react-hook-form"
+import emailjs from "@emailjs/browser"
+
+// Initialize EmailJS with the public key - Vite version only
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const RECIPIENT_EMAIL = import.meta.env.VITE_RECIPIENT_EMAIL
+
+// Initialize EmailJS
+emailjs.init(EMAILJS_PUBLIC_KEY)
 
 const LinkedInIcon = ({ className }) => (
   <svg
@@ -11,7 +23,79 @@ const LinkedInIcon = ({ className }) => (
   </svg>
 )
 
+const Notification = ({ message, isSuccess }) => (
+  <div
+    className={`mb-4 p-4 rounded-lg ${
+      isSuccess
+        ? "bg-green-50 border border-green-200"
+        : "bg-red-50 border border-red-200"
+    }`}
+  >
+    <h4
+      className={`font-medium ${isSuccess ? "text-green-800" : "text-red-800"}`}
+    >
+      {isSuccess ? "Success!" : "Error"}
+    </h4>
+    <p className={`text-sm ${isSuccess ? "text-green-700" : "text-red-700"}`}>
+      {message}
+    </p>
+  </div>
+)
+
 export default function Contact() {
+  const [notification, setNotification] = useState({
+    show: false,
+    message: "",
+    isSuccess: true,
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm()
+
+  const onSubmit = async (data) => {
+    setIsSubmitting(true)
+    try {
+      // Verify that environment variables are available
+      if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+        throw new Error("EmailJS configuration is missing")
+      }
+
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        from_name: data.fullName,
+        from_email: data.email,
+        message: data.message,
+        to_email: RECIPIENT_EMAIL,
+        reply_to: data.email,
+      })
+
+      setNotification({
+        show: true,
+        message:
+          "Your message has been sent successfully. We'll get back to you soon.",
+        isSuccess: true,
+      })
+      reset()
+    } catch (error) {
+      console.error("Email sending failed:", error)
+      setNotification({
+        show: true,
+        message: "Failed to send message. Please try again later.",
+        isSuccess: false,
+      })
+    } finally {
+      setIsSubmitting(false)
+      setTimeout(
+        () => setNotification({ show: false, message: "", isSuccess: true }),
+        5000
+      )
+    }
+  }
+
   return (
     <section
       id="contact"
@@ -57,7 +141,7 @@ export default function Contact() {
             </div>
 
             <div className="mt-6 md:mt-8">
-              <h3 className="text-[#121212] lext-lg font-bold font-serif">
+              <h3 className="text-[#121212] text-lg font-bold font-serif">
                 Follow us
               </h3>
               <div className="flex mt-4 -mx-1.5">
@@ -80,7 +164,17 @@ export default function Contact() {
                 Get in touch
               </h3>
 
-              <form className="mt-6">
+              {notification.show && (
+                <Notification
+                  message={notification.message}
+                  isSuccess={notification.isSuccess}
+                />
+              )}
+
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="mt-6"
+              >
                 <div className="flex-1">
                   <div className="mb-4">
                     <label
@@ -90,12 +184,25 @@ export default function Contact() {
                       Full Name
                     </label>
                     <input
+                      {...register("fullName", {
+                        required: "Full name is required",
+                        minLength: {
+                          value: 2,
+                          message: "Name must be at least 2 characters long",
+                        },
+                      })}
                       type="text"
                       id="fullName"
-                      name="fullName"
                       placeholder="John Doe"
-                      className="w-full px-3 py-2 text-[#121212] bg-white border rounded-md focus:outline-none focus:border-[#2c439c] font-serif"
+                      className={`w-full px-3 py-2 text-[#121212] bg-white border rounded-md focus:outline-none focus:border-[#2c439c] font-serif ${
+                        errors.fullName ? "border-red-500" : ""
+                      }`}
                     />
+                    {errors.fullName && (
+                      <p className="mt-1 text-sm text-red-500">
+                        {errors.fullName.message}
+                      </p>
+                    )}
                   </div>
                   <div className="mb-4">
                     <label
@@ -105,12 +212,25 @@ export default function Contact() {
                       Email address
                     </label>
                     <input
+                      {...register("email", {
+                        required: "Email is required",
+                        pattern: {
+                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                          message: "Invalid email address",
+                        },
+                      })}
                       type="email"
                       id="email"
-                      name="email"
                       placeholder="johndoe@example.com"
-                      className="w-full px-3 py-2 text-[#121212] bg-white border rounded-md focus:outline-none focus:border-[#2c439c] font-serif"
+                      className={`w-full px-3 py-2 text-[#121212] bg-white border rounded-md focus:outline-none focus:border-[#2c439c] font-serif ${
+                        errors.email ? "border-red-500" : ""
+                      }`}
                     />
+                    {errors.email && (
+                      <p className="mt-1 text-sm text-red-500">
+                        {errors.email.message}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -122,15 +242,32 @@ export default function Contact() {
                     Message
                   </label>
                   <textarea
+                    {...register("message", {
+                      required: "Message is required",
+                      minLength: {
+                        value: 10,
+                        message: "Message must be at least 10 characters long",
+                      },
+                    })}
                     id="message"
-                    name="message"
                     placeholder="Your message here..."
-                    className="w-full px-3 py-2 text-[#121212] bg-white border rounded-md focus:outline-none focus:border-[#2c439c] font-serif"
+                    className={`w-full px-3 py-2 text-[#121212] bg-white border rounded-md focus:outline-none focus:border-[#2c439c] font-serif ${
+                      errors.message ? "border-red-500" : ""
+                    }`}
                   ></textarea>
+                  {errors.message && (
+                    <p className="mt-1 text-sm text-red-500">
+                      {errors.message.message}
+                    </p>
+                  )}
                 </div>
 
-                <button className="w-full px-6 py-3 mt-6 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-[#2c439c] rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-[#2c439c] focus:ring-opacity-50">
-                  Send Message
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full px-6 py-3 mt-6 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-[#2c439c] rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-[#2c439c] focus:ring-opacity-50 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
               </form>
             </div>
