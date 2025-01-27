@@ -3,6 +3,7 @@ import { Menu, X, ChevronDown } from "lucide-react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import SlidingContactForm from "./SlidingContactForm"
 import { useNavigation } from "../NavigationContext"
+import logo from "../assets/logo.webp"
 
 const getCurrentSection = () => {
   const sections = [
@@ -225,7 +226,7 @@ export default function Navbar() {
             }}
           >
             <img
-              src="logo.png"
+              src={logo}
               className={`transition-all duration-300 ${
                 state.isSticky ? "h-8" : "h-10"
               }`}

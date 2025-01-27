@@ -1,0 +1,67 @@
+User-agent: *
+Allow: /
+
+# Enhanced Crawling Directives for Main Pages
+Allow: /*
+Allow: /gallery
+Allow: /search
+Allow: /about
+Allow: /contact
+Allow: /blog
+Allow: /news
+Allow: /resources
+Allow: /case-studies
+Allow: /testimonials
+
+# Static Assets with Clear Directives
+Allow: /assets/img/
+Allow: /assets/fonts/
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.png$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.woff2$
+Allow: /*.pdf$
+
+# Critical Assets
+Allow: /manifest.json
+Allow: /robots.txt
+Allow: /sitemap*.xml
+Allow: /favicon.ico
+Allow: /apple-touch-icon.png
+Allow: /android-chrome-*.png
+Allow: /safari-pinned-tab.svg
+Allow: /browserconfig.xml
+
+# Enhanced Security Blocks
+Disallow: /admin/
+Disallow: /api/
+Disallow: /internal/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /draft/
+Disallow: /*.sql$
+Disallow: /*.md$
+Disallow: /*.log$
+Disallow: /*.json$
+Disallow: /*.config.js$
+Disallow: /src/
+Disallow: /*?*
+Disallow: /*#*
+Disallow: /*?fbclid=
+Disallow: /*?utm_*
+Disallow: /search?q=
+
+# Performance Settings
+Crawl-delay: 1
+
+# Host Settings
+Host: https://globalsportinnovations.com
+
+# Enhanced Sitemap References
+Sitemap: https://globalsportinnovations.com/sitemap.xml
+Sitemap: https://globalsportinnovations.com/sitemap-images.xml
+Sitemap: https://globalsportinnovations.com/sitemap-news.xml
+Sitemap: https://globalsportinnovations.com/sitemap-posts.xml

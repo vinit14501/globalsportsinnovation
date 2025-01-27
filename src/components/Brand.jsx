@@ -2,6 +2,22 @@ import React, { useMemo, useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
+import usaLogo from "../assets/usa.webp"
+import pgLogo from "../assets/p&g.webp"
+import gmrLogo from "../assets/gmr.webp"
+import kelloggsLogo from "../assets/kelloggs.webp"
+import visaLogo from "../assets/visa.webp"
+import ilukaLogo from "../assets/iluka.webp"
+import cokeLogo from "../assets/coke.webp"
+import nbcLogo from "../assets/nbc.webp"
+import intelLogo from "../assets/intel.webp"
+import onlLogo from "../assets/onl.webp"
+import saltLakeLogo from "../assets/salt-lake.webp"
+import samsungLogo from "../assets/samsung.webp"
+import geLogo from "../assets/ge.webp"
+import ringsLogo from "../assets/rings.webp"
+import nikeLogo from "../assets/nike.webp"
+
 const useResponsiveSlides = (itemCount, baseItemsPerSlide = 4) => {
   const getResponsiveItemCount = useCallback(() => {
     if (typeof window === "undefined") return baseItemsPerSlide
@@ -26,22 +42,22 @@ const useResponsiveSlides = (itemCount, baseItemsPerSlide = 4) => {
 const Brand = () => {
   const brandsData = useMemo(
     () => [
-      { id: 1, logo: "usa.jpg" },
-      { id: 2, logo: "p&g.jpg" },
-      { id: 3, logo: "gmr.jpg" },
-      { id: 4, logo: "kelloggs.png" },
-      { id: 5, logo: "visa.png" },
-      { id: 6, logo: "iluka.jpg" },
-      { id: 7, logo: "coke.jpg" },
-      { id: 8, logo: "nbc.png" },
-      { id: 9, logo: "intel.jpg" },
-      { id: 10, logo: "onl.jpg" },
-      { id: 11, logo: "salt-lake.jpg" },
-      { id: 12, logo: "samsung.jpg" },
-      { id: 13, logo: "ge.png" },
-      { id: 14, logo: "rings.png" },
-      { id: 15, logo: "coke.jpg" },
-      { id: 16, logo: "nike.png" },
+      { id: 1, logo: usaLogo },
+      { id: 2, logo: pgLogo },
+      { id: 3, logo: gmrLogo },
+      { id: 4, logo: kelloggsLogo },
+      { id: 5, logo: visaLogo },
+      { id: 6, logo: ilukaLogo },
+      { id: 7, logo: cokeLogo },
+      { id: 8, logo: nbcLogo },
+      { id: 9, logo: intelLogo },
+      { id: 10, logo: onlLogo },
+      { id: 11, logo: saltLakeLogo },
+      { id: 12, logo: samsungLogo },
+      { id: 13, logo: geLogo },
+      { id: 14, logo: ringsLogo },
+      { id: 15, logo: cokeLogo },
+      { id: 16, logo: nikeLogo },
     ],
     []
   )

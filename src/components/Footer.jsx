@@ -2,6 +2,7 @@ import { useCallback, useMemo } from "react"
 import { Mail, Phone } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 import { useNavigation } from "../NavigationContext"
+import logo from "../assets/logo.webp"
 
 const ContactLink = ({ Icon, href, children, type }) => (
   <div className="flex items-center space-x-3">
@@ -73,7 +74,7 @@ const Footer = () => {
               onClick={handleLogoClick}
             >
               <img
-                src="logo.png"
+                src={logo}
                 alt="Global Sports Innovation Logo"
                 className="w-48 h-12 object-contain"
                 loading="lazy"

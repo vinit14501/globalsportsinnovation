@@ -1,4 +1,5 @@
-import React from "react"
+import about from "../assets/about.webp"
+import tick from "../assets/tick.webp"
 
 const listItems = [
   {
@@ -41,7 +42,7 @@ export default function About() {
                     className="flex items-center space-x-3"
                   >
                     <img
-                      src="tick.png"
+                      src={tick}
                       alt="Blue Tick"
                       className="w-6 h-6 flex-shrink-0"
                     />
@@ -58,7 +59,7 @@ export default function About() {
           <div className="w-full flex items-center justify-center">
             <img
               className="w-full max-w-[450px] h-auto aspect-square object-cover rounded-sm shadow-lg"
-              src="about.png"
+              src={about}
               alt="About Us"
             />
           </div>

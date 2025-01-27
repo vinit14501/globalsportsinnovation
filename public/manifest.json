@@ -1,0 +1,104 @@
+{
+  "name": "Global Sports Innovation - Revolutionary Sports Technology",
+  "short_name": "GSI",
+  "description": "Leading provider of cutting-edge sports technology solutions and innovative approaches to athletic performance. Transform your game with AI-powered analytics and training methods.",
+  "start_url": "/",
+  "id": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "categories": [
+    "sports",
+    "technology",
+    "fitness",
+    "innovation",
+    "analytics",
+    "training",
+    "performance"
+  ],
+  "lang": "en-US",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/home-desktop.webp",
+      "sizes": "1920x1080",
+      "type": "image/webp",
+      "platform": "wide",
+      "label": "Home Screen of Global Sports Innovation"
+    },
+    {
+      "src": "/screenshots/home-mobile.webp",
+      "sizes": "750x1334",
+      "type": "image/webp",
+      "platform": "narrow",
+      "label": "Mobile Home Screen of Global Sports Innovation"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Gallery",
+      "url": "/gallery",
+      "description": "View our sports innovation gallery"
+    },
+    {
+      "name": "Case Studies",
+      "url": "/case-studies",
+      "description": "Explore our success stories"
+    },
+    {
+      "name": "Contact",
+      "url": "/contact",
+      "description": "Get in touch with our team"
+    }
+  ],
+  "related_applications": [],
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "handle_links": "auto",
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  },
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+gsi",
+      "url": "/?search=%s"
+    }
+  ]
+}

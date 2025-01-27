@@ -25,4 +25,5 @@ dist-ssr
 
 network solutions.txt
 .env
+.env.production
 emailjs.txt

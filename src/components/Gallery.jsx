@@ -1,3 +1,20 @@
+import pic4 from "../assets/pic-4.webp"
+import pic5 from "../assets/pic-5.webp"
+import pic2 from "../assets/pic-2.webp"
+import pic3 from "../assets/pic-3.webp"
+import pic1 from "../assets/pic-1.webp"
+import pic7 from "../assets/pic-7.webp"
+import pic8 from "../assets/pic-8.webp"
+import pic9 from "../assets/pic-9.webp"
+import pic11 from "../assets/pic-11.webp"
+import pic6 from "../assets/pic-6.webp"
+import pic10 from "../assets/pic-10.webp"
+import pic12 from "../assets/pic-12.webp"
+import pic13 from "../assets/pic-13.webp"
+import pic15 from "../assets/pic-15.webp"
+import pic14 from "../assets/pic-14.webp"
+import pic16 from "../assets/pic-16.webp"
+
 const ImageItem = ({ src, alt = "" }) => (
   <div>
     <img
@@ -10,7 +27,7 @@ const ImageItem = ({ src, alt = "" }) => (
 )
 
 const ImageColumn = ({ images }) => (
-  <div className="grid gap-4">
+  <div className="grid gap-2">
     {images.map((src, index) => (
       <ImageItem
         key={index}
@@ -22,22 +39,22 @@ const ImageColumn = ({ images }) => (
 
 const Gallery = () => {
   const imageUrls = [
-    "pic-4.jpg",
-    "pic-5.jpeg",
-    "pic-2.jpeg",
-    "pic-3.jpeg",
-    "pic-1.jpeg",
-    "pic-7.jpg",
-    "pic-8.jpeg",
-    "pic-9.jpeg",
-    "pic-11.jpeg",
-    "pic-6.jpg",
-    "pic-10.jpeg",
-    "pic-12.jpeg",
-    "pic-13.JPG",
-    "pic-15.jpg",
-    "pic-14.jpeg",
-    "pic-16.jpeg",
+    pic4,
+    pic5,
+    pic2,
+    pic3,
+    pic1,
+    pic7,
+    pic8,
+    pic9,
+    pic11,
+    pic6,
+    pic10,
+    pic12,
+    pic13,
+    pic15,
+    pic14,
+    pic16,
   ]
 
   const columns = 4
@@ -48,7 +65,7 @@ const Gallery = () => {
       id="gallery"
       className="pt-24"
     >
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
         {[...Array(columns)].map((_, columnIndex) => (
           <ImageColumn
             key={columnIndex}

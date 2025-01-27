@@ -3,34 +3,84 @@
 @tailwind components;
 @tailwind utilities;
 
-.fixed {
-    position: fixed;
+@layer base {
+  :root {
+    --animation-duration: 300ms;
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply antialiased bg-white text-gray-900 min-h-screen;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  /* Improved focus styles */
+  *:focus-visible {
+    @apply outline-2 outline-blue-500 outline-offset-2;
+  }
+
+  /* Improved color contrast ratios */
+  .text-primary {
+    @apply text-blue-700 dark:text-blue-300;
+  }
 }
 
-.top-0 {
-    top: 0;
+@layer components {
+  .transition-base {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .mobile-menu {
+    @apply fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50;
+  }
+
+  .mobile-menu-open {
+    @apply translate-x-0;
+  }
+
+  .mobile-menu-closed {
+    @apply translate-x-full;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .input-base {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
+    min-height: 44px;
+  }
 }
 
-.right-0 {
-    right: 0;
+/* Optimized font loading */
+@font-face {
+  font-family: 'Inter var';
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  font-named-instance: 'Regular';
+  src: url('/fonts/Inter-roman.var.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-.translate-x-0 {
-    transform: translateX(0);
+/* Performance optimizations */
+img {
+  content-visibility: auto;
+  aspect-ratio: attr(width) / attr(height);
 }
 
-.translate-x-full {
-    transform: translateX(100%);
-}
-
-.transition-transform {
-    transition-property: transform;
-}
-
-.duration-300 {
-    transition-duration: 300ms;
-}
-
-.ease-in-out {
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+/* Skip link for keyboard navigation */
+.skip-link {
+  @apply sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-white focus:text-blue-700;
 }

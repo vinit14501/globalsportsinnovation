@@ -1,24 +1,27 @@
 import { useState, useCallback, useEffect, useMemo } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import SlidingContactForm from "./SlidingContactForm"
+import carousel_1 from "../assets/carousel-1.webp"
+import carousel_2 from "../assets/carousel-2.webp"
+import carousel_3 from "../assets/carousel-3.webp"
+import carousel_4 from "../assets/carousel-4.webp"
 
 const slides = [
   {
-    image: "carousel-3.jpg",
+    image: carousel_1,
     title:
       "Are your sponsorships truly delivering the impact your brand deserves? ",
-    // buttonText: "Get a quote",
   },
   {
-    image: "carousel-5.jpg",
+    image: carousel_2,
     title: "30+ years, 15 Olympic Games—turning sponsorships into growth",
   },
   {
-    image: "carousel-2.jpg",
+    image: carousel_3,
     title: "Sponsorships should deliver results, not just visibility",
   },
   {
-    image: "carousel-1.jpg",
+    image: carousel_4,
     title:
       "We help executives like you simplify complexities and maximize partnership potential",
   },
@@ -55,11 +58,14 @@ export default function Carousel() {
             ? "opacity-100"
             : "opacity-0 pointer-events-none"
         }`}
+        role="tabpanel"
+        aria-label={`Slide ${index + 1}: ${slide.title}`}
+        aria-hidden={index !== activeSlide}
       >
         <img
           src={slide.image}
           className="absolute block w-full h-full object-cover"
-          alt=""
+          alt={slide.title}
         />
         <div className="absolute inset-0 flex flex-col justify-center bg-[#121212] bg-opacity-50 px-4 sm:px-6 lg:px-8">
           <div className="w-full md:w-2/3 lg:w-1/2 max-w-screen-xl mx-auto md:ml-8 lg:ml-16">
@@ -69,7 +75,8 @@ export default function Carousel() {
             {slide.buttonText && (
               <button
                 onClick={toggleForm}
-                className="bg-[#2c439c] hover:bg-blue-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-base sm:text-lg cursor-pointer font-serif"
+                className="bg-[#2c439c] hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-base sm:text-lg cursor-pointer font-serif min-h-[48px]"
+                aria-label={slide.buttonText}
               >
                 {slide.buttonText}
               </button>
@@ -86,13 +93,14 @@ export default function Carousel() {
       <button
         onClick={onClick}
         className={`absolute top-1/2 ${
-          direction === "left" ? "left-2 sm:left-4" : "right-2 sm:right-4"
-        } transform -translate-y-1/2 bg-[#121212] bg-opacity-25 hover:bg-blue-700 text-white p-2 sm:p-3 rounded-full transition duration-300 cursor-pointer`}
+          direction === "left" ? "left-4 sm:left-6" : "right-4 sm:right-6"
+        } transform -translate-y-1/2 bg-[#121212] bg-opacity-25 hover:bg-blue-700 text-white p-4 rounded-full transition duration-300 cursor-pointer min-w-[48px] min-h-[48px] touch-manipulation`}
+        aria-label={`${direction === "left" ? "Previous" : "Next"} slide`}
       >
         {direction === "left" ? (
-          <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" />
+          <ChevronLeft className="w-8 h-8" />
         ) : (
-          <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" />
+          <ChevronRight className="w-8 h-8" />
         )}
       </button>
     ),
@@ -104,11 +112,14 @@ export default function Carousel() {
       <button
         key={index}
         onClick={() => goToSlide(index)}
-        className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 focus:outline-none cursor-pointer ${
+        className={`w-6 h-6 rounded-full transition-all duration-300 focus:outline-none cursor-pointer m-2 touch-manipulation ${
           index === activeSlide
             ? "bg-[#2c439c] scale-125"
             : "bg-white hover:bg-blue-200"
         }`}
+        aria-label={`Go to slide ${index + 1}`}
+        aria-selected={index === activeSlide}
+        role="tab"
       />
     ),
     [activeSlide, goToSlide]
@@ -124,6 +135,8 @@ export default function Carousel() {
     <div
       id="home"
       className="relative max-h-full w-full pt-20 bg-white"
+      role="region"
+      aria-label="Image carousel"
     >
       <div className="relative h-[calc(100vh-100px)] overflow-hidden">
         {memoizedSlides}
@@ -139,7 +152,11 @@ export default function Carousel() {
         onClick: () => goToSlide((activeSlide + 1) % slides.length),
       })}
 
-      <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-3">
+      <div
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-4"
+        role="tablist"
+        aria-label="Carousel navigation"
+      >
         {memoizedIndicators}
       </div>
 

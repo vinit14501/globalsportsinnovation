@@ -1,3 +1,5 @@
+import ceo from "../assets/ceo.webp"
+
 const Ceo = () => {
   return (
     <section
@@ -11,7 +13,7 @@ const Ceo = () => {
             <div className="max-w-md mx-auto">
               <img
                 className="w-full h-auto rounded-sm shadow-md transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-blue-100"
-                src="ceo.jpeg"
+                src={ceo}
                 alt="CEO Susan Goldsmith"
               />
             </div>
