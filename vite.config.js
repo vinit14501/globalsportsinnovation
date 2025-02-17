@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from "vite"
 import react from "@vitejs/plugin-react"
 import { VitePWA } from "vite-plugin-pwa"
 import viteCompression from "vite-plugin-compression"
+import imagemin from "vite-plugin-imagemin"
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "")
@@ -18,6 +19,12 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
+      imagemin({
+        gifsicle: { optimizationLevel: 3 },
+        mozjpeg: { quality: 75 },
+        pngquant: { quality: [0.8, 0.9] },
+        webp: { quality: 75 },
+      }),
       react({
         babel: {
           plugins: [
@@ -56,34 +63,19 @@ export default defineConfig(({ mode }) => {
           ],
         },
         workbox: {
-          maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
-          globPatterns: ["**/*.{js,css,html,ico,png,svg,webp,woff2}"],
+          cleanupOutdatedCaches: true,
+          skipWaiting: true,
+          clientsClaim: true,
+          maximumFileSizeToCacheInBytes: 2 * 1024 * 1024, // Reduce from 5MB to 2MB
           runtimeCaching: [
-            {
-              urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-              handler: "CacheFirst",
-              options: {
-                cacheName: "google-fonts-cache",
-                expiration: {
-                  maxEntries: 10,
-                  maxAgeSeconds: 60 * 60 * 24 * 365,
-                },
-                cacheableResponse: {
-                  statuses: [0, 200],
-                },
-              },
-            },
             {
               urlPattern: /\.(webp|avif|png|jpg|jpeg)$/,
               handler: "CacheFirst",
               options: {
-                cacheName: "image-cache",
+                cacheName: "images",
                 expiration: {
-                  maxEntries: 50,
-                  maxAgeSeconds: 60 * 60 * 24 * 30,
-                },
-                cacheableResponse: {
-                  statuses: [0, 200],
+                  maxEntries: 30, // Reduced from 50
+                  maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
                 },
               },
             },
@@ -102,10 +94,10 @@ export default defineConfig(({ mode }) => {
       }),
     ],
     build: {
-      target: "es2015",
+      target: "esnext",
       minify: "terser",
       sourcemap: false,
-      cssCodeSplit: true,
+      cssCodeSplit: false,
       assetsInlineLimit: 4096,
       modulePreload: {
         polyfill: true,
@@ -125,9 +117,8 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         output: {
           manualChunks: {
-            react: ["react", "react-dom"],
-            router: ["react-router-dom"],
-            ui: ["flowbite", "flowbite-react"],
+            vendor: ["react", "react-dom", "react-router-dom"],
+            ui: ["flowbite-react"],
           },
           assetFileNames: (assetInfo) => {
             const extType = assetInfo.name.split(".")[1]
