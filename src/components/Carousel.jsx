@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect, useMemo } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import SlidingContactForm from "./SlidingContactForm"
 import carousel_1 from "../assets/carousel-1.webp"
 import carousel_2 from "../assets/carousel-2.webp"
 import carousel_3 from "../assets/carousel-3.webp"
@@ -10,7 +9,7 @@ const slides = [
   {
     image: carousel_1,
     title:
-      "Are your sponsorships truly delivering the impact your brand deserves? ",
+      "Are your sponsorships truly delivering the impact your brand deserves?",
   },
   {
     image: carousel_2,
@@ -159,11 +158,6 @@ export default function Carousel() {
       >
         {memoizedIndicators}
       </div>
-
-      <SlidingContactForm
-        isOpen={isFormOpen}
-        onClose={toggleForm}
-      />
     </div>
   )
 }

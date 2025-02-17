@@ -239,7 +239,7 @@ export default function Navbar() {
               className="text-white bg-[#2c439c] hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-[#93C5FD] rounded-lg text-sm px-5 py-2.5 text-center transition duration-300 ease-in-out transform hover:scale-105 font-serif font-bold"
               onClick={() => toggleState("isContactFormOpen")}
             >
-              Book Now
+              Get in Touch
             </button>
             <button
               onClick={() => toggleState("isMobileMenuOpen")}

@@ -1,8 +1,9 @@
-# Protect configuration files
-<Files ~ "^.*\.(env|json|config.js|jsx)$">
-    Order Deny,Allow
-    Deny from all
-</Files>
+# Set correct MIME types
+AddType application/javascript .js
+AddType application/javascript .mjs
+AddType text/javascript .jsx
+AddType font/woff2 .woff2
+AddType image/webp .webp
 
 # Enable rewrite engine
 RewriteEngine On
@@ -15,10 +16,6 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteRule ^(.*)$ https://%{HTTP_HOST_PURE}%{REQUEST_URI} [R=301,L]
 
-# Remove multiple slashes
-RewriteCond %{REQUEST_URI} ^(.*)//+(.*)$
-RewriteRule ^ %1/%2 [R=301,L]
-
 # Handle React Router routes
 RewriteBase /
 RewriteRule ^index\.html$ - [L]
@@ -26,9 +23,6 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-l
 RewriteRule . /index.html [QSA,L]
-
-# Prevent directory listing
-Options -Indexes
 
 # Security headers
 <IfModule mod_headers.c>
@@ -41,12 +35,17 @@ Options -Indexes
     Header always set X-XSS-Protection "1; mode=block"
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
     
-    # CSP - Adjusted for React app with Flowbite
-    Header set Content-Security-Policy "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: /api/placeholder/; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https:; frame-ancestors 'none';"
+    # Modified CSP to allow necessary resources
+    Header set Content-Security-Policy "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: /api/placeholder/ blob:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https: ws: wss:; frame-ancestors 'none'; manifest-src 'self';"
 
-    # Cache Control
+    # Allow font loading
+    <FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|font.css)$">
+        Header set Access-Control-Allow-Origin "*"
+    </FilesMatch>
+
+    # Cache Control - Modified for better asset handling
     <FilesMatch "\.(ico|pdf|jpg|jpeg|png|gif|js|css|svg|webp|woff2?)$">
-        Header set Cache-Control "max-age=31536000, public"
+        Header set Cache-Control "public, max-age=31536000, immutable"
     </FilesMatch>
 
     # No cache for HTML and data files
@@ -57,12 +56,16 @@ Options -Indexes
     </FilesMatch>
 </IfModule>
 
+# Allow access to web fonts and images
+<FilesMatch "\.(ttf|otf|eot|woff|woff2|svg|webp|jpg|jpeg|png|gif)$">
+    Allow from all
+    Satisfy Any
+    Order allow,deny
+</FilesMatch>
+
 # Compression
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json application/xml
-    
-    # Compress fonts
-    AddOutputFilterByType DEFLATE application/x-font-ttf application/x-font-opentype image/svg+xml font/woff font/woff2
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript application/json application/xml application/font-woff application/font-woff2 font/woff font/woff2 image/svg+xml
     
     # Remove browser bugs
     BrowserMatch ^Mozilla/4 gzip-only-text/html
@@ -74,45 +77,26 @@ Options -Indexes
 # Cache static assets
 <IfModule mod_expires.c>
     ExpiresActive On
-    
-    # Set default
     ExpiresDefault "access plus 1 month"
     
     # Media files
+    ExpiresByType image/webp "access plus 1 year"
     ExpiresByType image/jpg "access plus 1 year"
     ExpiresByType image/jpeg "access plus 1 year"
     ExpiresByType image/gif "access plus 1 year"
     ExpiresByType image/png "access plus 1 year"
-    ExpiresByType image/webp "access plus 1 year"
     ExpiresByType image/svg+xml "access plus 1 year"
-    
-    # CSS and JavaScript
-    ExpiresByType text/css "access plus 1 year"
-    ExpiresByType text/javascript "access plus 1 year"
-    ExpiresByType application/javascript "access plus 1 year"
     
     # Fonts
     ExpiresByType font/woff "access plus 1 year"
     ExpiresByType font/woff2 "access plus 1 year"
     ExpiresByType application/font-woff "access plus 1 year"
     ExpiresByType application/font-woff2 "access plus 1 year"
-</IfModule>
-
-# Prevent image hotlinking
-<IfModule mod_rewrite.c>
-    RewriteCond %{HTTP_REFERER} !^$
-    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?globalsportinnovations\.com [NC]
-    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?google\. [NC]
-    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?bing\. [NC]
-    RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [F]
-</IfModule>
-
-# Block bad bots
-<IfModule mod_setenvif.c>
-    SetEnvIfNoCase User-Agent "^libwww-perl*" block_bad_bots
-    SetEnvIfNoCase User-Agent "^scrapy*" block_bad_bots
-    SetEnvIfNoCase User-Agent "^bot*" block_bad_bots
-    Deny from env=block_bad_bots
+    
+    # CSS and JavaScript
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
 </IfModule>
 
 # Performance optimizations
